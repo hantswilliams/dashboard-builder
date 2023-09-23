@@ -5,7 +5,7 @@
 ## Local Dev Notes
 
 Using poetry for managing dependencies and deploying. On my local machine also using pyenv for python version controll manager. So start up the remote 
-environment, can do the following:
+environment, can do the following below from [this blog post](https://www.freecodecamp.org/news/how-to-build-and-publish-python-packages-with-poetry/):
 
 1. Set the python version - currently 3.10 for this project: `pyenv global 3.10.0`
 2. Tell poetry to use that: `poetry env use $(pyenv which python)` 
