@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "dashboard-builder"
+version = "0.1.0"
+description = ""
+authors = ["Hants Williams <hantsawilliams@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.13"
+requests = "^2.31.0"
+flask = "^2.3.3"
+pandas = "^2.1.1"
+markdown = "^3.4.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
