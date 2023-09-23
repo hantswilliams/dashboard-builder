@@ -18,7 +18,14 @@ FORM_GROUP_TEMPLATE = """
         <div class="markdown-body mb-2">{{ markdown_bottom|safe }}</div>
     {% endif %}
     
-    <button type="submit" class="rounded bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Select</button>
+    <button 
+        type="submit" 
+        class="rounded bg-white px-2 py-1 text-sm font-semibold 
+        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 
+        hover:bg-gray-50"
+    >
+        Select
+    </button>
 </form>
 """
 
@@ -27,7 +34,8 @@ FORM_GROUP_TEMPLATE = """
 class ComponentManager:
     def __init__(self, request):
         """
-        Initialize the ComponentManager with a request object to handle input components.
+        Initialize the ComponentManager with a request object 
+        to handle input components.
         
         Args:
         - request (flask.Request): The current Flask request object.
@@ -39,7 +47,8 @@ class ComponentManager:
 
     def register_inputs(self, *input_components):
         """
-        Register multiple input components, capture their values from the request, and append them to the inputs list.
+        Register multiple input components, capture their values from the request, 
+        and append them to the inputs list.
 
         Args:
         - *input_components (BaseInput): The input components to register.
@@ -118,8 +127,10 @@ class FormGroup:
     def __init__(self, action_url='/', markdown_top=None, markdown_bottom=None):
         """
         :param action_url: URL to which the form data should be posted.
-        :param markdown_top: Optional markdown content to be displayed at the top of the section.
-        :param markdown_bottom: Optional markdown content to be displayed at the bottom of the section.
+        :param markdown_top: Optional markdown content to be 
+        displayed at the top of the section.
+        :param markdown_bottom: Optional markdown content to be 
+        displayed at the bottom of the section.
         """
         self.action_url = action_url
         self.inputs = []

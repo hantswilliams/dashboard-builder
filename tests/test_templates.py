@@ -8,6 +8,7 @@ def test_get_existing_template():
     assert template_content.strip() != ""
 
 def test_get_nonexistent_template():
-    # This test will check if fetching a non-existent template raises a FileNotFoundError
+    # This test will check if fetching a 
+    # non-existent template raises a FileNotFoundError
     with pytest.raises(FileNotFoundError):
         get_template("nonexistent.html")
