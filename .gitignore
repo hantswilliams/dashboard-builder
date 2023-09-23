@@ -4,3 +4,5 @@ __pycache__/
 ## ignore dist folder
 dist/
 
+## ignore pytest cache
+.pytest_cache/

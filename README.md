@@ -149,6 +149,17 @@ For each of these features, there is a default 'Select All'. So when you add in 
 
 ## Local Dev Notes
 
+### Pytest 
+
+Pytest is installed as a local dev. Current test are found within `/tests`. Need to continue building out, but for now there are a few. 
+
+To run the pytests, inside the root directory can run the following:
+```bash
+poetry run pytest
+```
+
+### Poetry and Deployment 
+
 I'm new to poetry so putting this information here so I dont forgot. Using 
 poetry for managing dependencies and deploying. On my local machine 
 also using pyenv for python version controll manager. So start up the remote 
