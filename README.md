@@ -202,3 +202,9 @@ poetry build
 ```bash
 poetry publish
 ``` 
+
+3. For subsequent builds, need to update the version number first in the .toml file, otherwise the build will fail. Once .toml version is updated, can even do the build/publish in the same command like so:
+
+```bash
+poetry published --build
+```
