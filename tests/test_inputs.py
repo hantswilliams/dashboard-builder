@@ -3,6 +3,8 @@ from dashboard_builder.components.inputs import InputSlider_Categorical
 from dashboard_builder.components.inputs import InputDropdown
 from dashboard_builder.components.inputs import InputRadio
 
+## this is a test to make sure that ruff linter is working and finding lines that are longer then what they should be in github actions
+
 def test_base_input_initialization():
     input_component = BaseInput(name="test", default_value="This is a default value")
     assert input_component.name == "test"
