@@ -4,7 +4,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../.
 
 from flask import Flask, render_template_string, request # noqa: E402, F401
 import pandas as pd # noqa: E402, F401
-from dashboard_builder import get_template # noqa: E402, F401
+from dashboard_builder import get_dashboard_template # noqa: E402, F401
 from dashboard_builder.components.inputs import InputDropdown # noqa: E402, F401
 
 app = Flask(__name__)

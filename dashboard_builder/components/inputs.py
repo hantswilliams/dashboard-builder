@@ -1,15 +1,7 @@
 # components/inputs.py
 
 from flask import render_template_string
-import os
-import sys
-
-def get_html_subtemplate(template_name):
-    current_dir = os.path.dirname(__file__) #noqa: E501 add the parent folder to the path, e.g., root folder of dashboard_builder package 
-    sys.path.insert(0, os.path.abspath(os.path.join(current_dir, "../..")))
-    template_path = os.path.join(current_dir, 'templates', template_name)
-    with open(template_path, 'r') as file:
-        return file.read()
+from ..utils import get_jinja_subtemplate
 
 class BaseInput:
     def __init__(self, name, default_value=""):
@@ -38,8 +30,6 @@ class InputDropdown(BaseInput):
 
     def capture(self, request):
         self.value = request.form.get(self.name)
-
-        print(f"Captured value for {self.name}: {self.value}")  # debugging
         
         if not self.value:
             self.value = "Select All"
@@ -48,7 +38,7 @@ class InputDropdown(BaseInput):
 
     def render(self):
         return render_template_string(
-            get_html_subtemplate("inputs/inputdropdown.html"), 
+            get_jinja_subtemplate("inputs/inputdropdown.j2"), 
             name=self.name, label=self.label, 
             values=self.values, selected_value=self.selected_value)
     
@@ -63,7 +53,7 @@ class TextInput(BaseInput):
 
     def render(self):
         return render_template_string(
-            get_html_subtemplate("inputs/textinput.html"),
+            get_jinja_subtemplate("inputs/textinput.j2"),
             name=self.name, label=self.label, 
             default_value=self.default_value)
 
@@ -85,7 +75,7 @@ class InputSlider_Numerical(BaseInput):
 
     def render(self):
         return render_template_string(
-            get_html_subtemplate("inputs/inputslider_numerical.html"),
+            get_jinja_subtemplate("inputs/inputslider_numerical.j2"),
             name=self.name, label=self.label, 
             min_value=self.min_value, max_value=self.max_value, step=self.step, 
             default_value=self.default_value)
@@ -110,7 +100,7 @@ class InputSlider_Categorical(BaseInput):
         # Position is zero-indexed based on categories list
         default_position = self.categories.index(self.default_value)
         return render_template_string(
-            get_html_subtemplate("inputs/inputslider_categorical.html"),
+            get_jinja_subtemplate("inputs/inputslider_categorical.j2"),
             name=self.name, label=self.label, max_position=len(self.categories)-1, 
             default_position=default_position, categories=self.categories)
 
@@ -140,6 +130,6 @@ class InputRadio(BaseInput):
 
     def render(self):
         return render_template_string(
-            get_html_subtemplate("inputs/inputradio.html"),
+            get_jinja_subtemplate("inputs/inputradio.j2"),
             name=self.name, label=self.label, options=self.options, 
             default_value=self.default_value)

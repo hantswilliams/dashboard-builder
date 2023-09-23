@@ -138,15 +138,14 @@ class FormGroup:
         self.markdown_bottom = markdown_bottom
 
     def add_inputs(self, *input_components):
-            """
-            Add multiple input components to the form group.
+        """
+        Add multiple input components to the form group.
 
-            Args:
-            - *input_components (BaseInput): The input components to add.
+        Args:
+        - *input_components (BaseInput): The input components to add.
 
-            Returns:
-            - None
-            """
-            for input_component in input_components:
-                print(f"Adding input: {input_component.name}")  # Debugging statement
-                self.inputs.append(input_component)
+        Returns:
+        - None
+        """
+        for input_component in input_components:
+            self.inputs.append(input_component)

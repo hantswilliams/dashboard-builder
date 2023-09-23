@@ -2,12 +2,13 @@ from flask import Flask, render_template_string, request
 import pandas as pd
 from helper_functions import process_data
 
-#### For local dev testing....
+#### For local dev testing....//otherwise turn off - comment out below ###
 import os 
 import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+##########################################################################
 
-from dashboard_builder import get_template  # noqa: E402
+from dashboard_builder import get_dashboard_template  # noqa: E402
 from dashboard_builder.components.inputs import InputDropdown # noqa: E402
 from dashboard_builder.components.inputs import InputSlider_Categorical # noqa: E402
 from dashboard_builder.components.inputs import InputRadio # noqa: E402
@@ -92,7 +93,7 @@ def index():
 
     # Step 5: Render the template with the inputs and outputs
     return render_template_string(
-        get_template('base.html'),
+        get_dashboard_template('base'),
         form_groups=manager.render_form_groups(), 
         output_components=manager.render_outputs()
     )
