@@ -1,6 +1,15 @@
 # components/inputs.py
 
 from flask import render_template_string
+import os
+import sys
+
+def get_html_subtemplate(template_name):
+    current_dir = os.path.dirname(__file__) #noqa: E501 add the parent folder to the path, e.g., root folder of dashboard_builder package 
+    sys.path.insert(0, os.path.abspath(os.path.join(current_dir, "../..")))
+    template_path = os.path.join(current_dir, 'templates', template_name)
+    with open(template_path, 'r') as file:
+        return file.read()
 
 class BaseInput:
     def __init__(self, name, default_value=""):
@@ -34,32 +43,15 @@ class InputDropdown(BaseInput):
         
         if not self.value:
             self.value = "Select All"
+
         self.selected_value = self.value
 
     def render(self):
-        print("....Rendering dropdown....") 
-        template = '''
-        <div class="overflow-hidden">
-            <label for="{{ name }}" 
-                class="block text-sm font-medium text-red-700 mb-2">{{ label }}</label>
-            <div class="relative">
-                <select name="{{ name }}" 
-                    class="w-full bg-white border border-gray-300 rounded-md py-2 px-4 
-                    block w-full text-sm focus:outline-none focus:ring 
-                    focus:ring-opacity-50 focus:ring-blue-500">
-                        {% for value in values %}
-                            <option value="{{ value }}" 
-                                {% if value == selected_value %} 
-                                    selected {% endif %} > {{ value }}
-                            </option>
-                        {% endfor %}
-                </select>
-            </div>
-        </div>
-        '''
         return render_template_string(
-            template, name=self.name, label=self.label, 
+            get_html_subtemplate("inputs/inputdropdown.html"), 
+            name=self.name, label=self.label, 
             values=self.values, selected_value=self.selected_value)
+    
 class TextInput(BaseInput):
     def __init__(self, name, label, default_value=""):
         super().__init__(name, default_value)
@@ -70,26 +62,9 @@ class TextInput(BaseInput):
         self.default_value = self.value
 
     def render(self):
-        template = '''
-        <div class="overflow-hidden mb-4">
-            <label for="{{ name }}" class="block text-sm font-medium 
-            text-gray-700 mb-2">
-                {{ label }}
-            </label>
-            <input 
-                type="text" 
-                id="{{ name }}" 
-                name="{{ name }}" 
-                value="{{ default_value }}" 
-                class="w-full border border-gray-300 p-2 rounded-md 
-                focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-blue-500"
-            >
-        </div>
-        '''
         return render_template_string(
-            template, 
-            name=self.name, 
-            label=self.label, 
+            get_html_subtemplate("inputs/textinput.html"),
+            name=self.name, label=self.label, 
             default_value=self.default_value)
 
 class InputSlider_Numerical(BaseInput):
@@ -109,45 +84,11 @@ class InputSlider_Numerical(BaseInput):
         self.default_value = self.value
 
     def render(self):
-        template = '''
-        <div class="overflow-hidden mb-4">
-            <label 
-                for="{{ name }}" 
-                class="block text-sm font-medium text-gray-700 mb-2"
-            >
-                {{ label }}
-            </label>
-            <input 
-                type="range" 
-                id="{{ name }}" 
-                name="{{ name }}" 
-                min="{{ min_value }}" 
-                max="{{ max_value }}" 
-                step="{{ step }}" 
-                value="{{ default_value }}" 
-                class="w-full border border-gray-300 p-2 rounded-md focus:outline-none 
-                focus:ring focus:ring-opacity-50 focus:ring-blue-500" 
-                oninput="updateOutput(this)"
-            >
-            <output 
-                for="{{ name }}" 
-                id="{{ name }}_output" 
-                class="text-sm text-gray-500"
-            >
-                {{ default_value }}
-            </output>
-        </div>
-        <script>
-            function updateOutput(slider) {
-                const output = document.getElementById(slider.id + "_output");
-                output.value = slider.value;
-            }
-        </script>
-        '''
         return render_template_string(
-            template, name=self.name, label=self.label, 
-            min_value=self.min_value, max_value=self.max_value, 
-            step=self.step, default_value=self.default_value)
+            get_html_subtemplate("inputs/inputslider_numerical.html"),
+            name=self.name, label=self.label, 
+            min_value=self.min_value, max_value=self.max_value, step=self.step, 
+            default_value=self.default_value)
 
 class InputSlider_Categorical(BaseInput):
     def __init__(self, name, label, categories, default_value=None):
@@ -166,59 +107,12 @@ class InputSlider_Categorical(BaseInput):
         self.default_value = self.value
 
     def render(self):
-        template = '''
-        <div class="overflow-hidden mb-4">
-            <label 
-                for="{{ name }}" 
-                class="block text-sm font-medium text-gray-700 mb-2"
-            >
-                {{ label }}
-            </label>
-            <input 
-                type="range" 
-                id="{{ name }}_range" 
-                min="0" 
-                max="{{ max_position }}" 
-                value="{{ default_position }}" 
-                class="w-full border border-gray-300 p-2 
-                rounded-md focus:outline-none focus:ring 
-                focus:ring-opacity-50 focus:ring-blue-500"
-                oninput="updateCategoryDisplay(this)"
-            >
-            <output 
-                for="{{ name }}_range" 
-                id="{{ name }}_output" 
-                class="text-sm text-gray-500"
-            >
-                {{ categories[default_position] }}
-            </output>
-            <!-- Hidden field to store the category name -->
-            <input 
-                type="hidden" 
-                id="{{ name }}" 
-                name="{{ name }}" 
-                value="{{ default_value }}"
-            >
-        </div>
-
-        <script>
-            function updateCategoryDisplay(slider) {
-                const baseId = slider.id.replace("_range", "");
-                const outputElement = document.getElementById(baseId + '_output');
-                const hiddenInputElement = document.getElementById(baseId);
-                const categories = {{ categories|tojson }};
-                outputElement.textContent = categories[slider.value];
-                hiddenInputElement.value = categories[slider.value]; 
-            }
-        </script>
-        
-        '''
         # Position is zero-indexed based on categories list
         default_position = self.categories.index(self.default_value)
-        return render_template_string(template, name=self.name, label=self.label, 
-                                      max_position=len(self.categories)-1, 
-                                      default_position=default_position, 
-                                      categories=self.categories)
+        return render_template_string(
+            get_html_subtemplate("inputs/inputslider_categorical.html"),
+            name=self.name, label=self.label, max_position=len(self.categories)-1, 
+            default_position=default_position, categories=self.categories)
 
 
 class InputRadio(BaseInput):
@@ -245,34 +139,7 @@ class InputRadio(BaseInput):
             self.default_value = captured_value
 
     def render(self):
-        template = '''
-        <div class="overflow-hidden mb-4">
-            <span 
-                class="block text-sm font-medium text-gray-700 mb-2"
-            >
-                {{ label }}
-            </span>
-            {% for option in options %}
-            <div class="flex items-center mb-2">
-                <input 
-                    type="radio" 
-                    id="{{ name }}_{{ option }}" 
-                    name="{{ name }}" 
-                    value="{{ option }}" 
-                    class="focus:ring-indigo-500 h-4 w-4 
-                    text-indigo-600 border-gray-300"
-                    {% if option == default_value %} checked {% endif %}
-                >
-                <label 
-                    for="{{ name }}_{{ option }}" 
-                    class="ml-3 block text-sm font-medium text-gray-900"
-                >
-                    {{ option }}
-                </label>
-            </div>
-            {% endfor %}
-        </div>
-        '''
-        return render_template_string(template, name=self.name, 
-                                      label=self.label, options=self.options, 
-                                      default_value=self.default_value)
+        return render_template_string(
+            get_html_subtemplate("inputs/inputradio.html"),
+            name=self.name, label=self.label, options=self.options, 
+            default_value=self.default_value)
