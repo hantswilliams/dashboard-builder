@@ -4,7 +4,6 @@ version = "0.1.6"
 description = ""
 authors = ["Hants Williams <hantsawilliams@gmail.com>"]
 readme = "README.md"
-include = ["dashboard_builder/templates/*"]
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.13"
