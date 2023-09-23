@@ -12,8 +12,20 @@ environment, can do the following:
 3. Then can add things, e.g., `poetry add requests` 
 
 Once done there, can then generate the requirements.txt file with:
-```bash poetry export --output requirements.txt```
+
+```bash
+poetry export --output requirements.txt
+```
 
 For publishing: 
-1. Package the updates: ```bash poetry build``` 
-2. Once it has finished packing, can run ```bash poetry publish``` to get the latest/greatest version on pypi 
+1. Package the updates: 
+
+```bash 
+poetry build
+
+``` 
+2. Once it has finished packing, can run below to get the latest version on pypi: 
+
+```bash
+poetry publish
+``` 
