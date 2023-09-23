@@ -1,6 +1,6 @@
 import os
 
-templates = os.listdir(os.path.join(os.path.dirname(__file__), 'templates'))
+templates = os.listdir(os.path.join(os.path.dirname(__file__), 'dashboard_templates'))
 templates_dict = {os.path.splitext(template)[0]: template for template in templates}
 
 def get_dashboard_template(template_name):
@@ -19,7 +19,7 @@ def get_dashboard_template(template_name):
     current_dir = os.path.dirname(__file__) 
     # Fetching the correct file name from the dictionary
     file_name = templates_dict.get(template_name, template_name)
-    template_path = os.path.join(current_dir, 'templates', file_name)
+    template_path = os.path.join(current_dir, 'dashboard_templates', file_name)
     
     with open(template_path, 'r') as file:
         return file.read()
