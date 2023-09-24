@@ -14,6 +14,7 @@ from dashboard_builder.config import Config # noqa: E402
 from dashboard_builder.components.inputs import InputDropdown, InputSlider_Categorical, InputRadio # noqa: E402, E501
 from dashboard_builder.components.outputs import OutputText, OutputChart_Matplotlib, OutputChart_Altair, OutputTable_HTML, OutputImage, OutputMarkdown # noqa: E501, E402
 from dashboard_builder.components.managers import ComponentManager, FormGroup # noqa: E402, E501
+from dashboard_builder.components.layouts import ColumnLayout
 
 app = Flask(__name__)
 
@@ -21,7 +22,7 @@ dashboard_settings = Config(
     footer_text="Built by Hants Williams, PhD, RN - Clinical Assistant Professor - Stony Brook University, School of Health Professions - Applied Health Informatics" # noqa: E501
     )
 
-df = pd.read_csv('https://raw.githubusercontent.com/hantswilliams/dashboard-builder/main/example_dashboards/app2/ny_suffolk_nassau.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/hantswilliams/dashboard-builder/main/tests/test_app_3/ny_suffolk_nassau.csv')
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -63,17 +64,39 @@ def index():
     output_df, sum_stats_df, fig1 = process_data(df, [input2_dropdown.value, input2_slider.value, input2_radio.value]) # noqa: E501
     ################################################################################################
 
-
-    ### Quick test
+    ### Quick test for Altair 
     source = pd.DataFrame({
         'a': ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
         'b': [28, 55, 43, 91, 81, 53, 19, 87, 52]
     })
 
-    altair_sample_chart = alt.Chart(source, width=250, height=250).mark_bar().encode(
+    altair_sample_chart = alt.Chart(source, width=500, height=500).mark_bar().encode(
         x='a',
         y='b'
     )
+
+    altair_sample_chart22 = alt.Chart(source, width=150, height=100).mark_bar().encode(
+        x='a',
+        y='b'
+    )
+
+    altair_sample_chart2 = alt.Chart(source, width=250, height=250).mark_bar().encode(
+        x='a',
+        y='b'
+    )
+
+    ### Quick test for Column Layout with 4 columns
+    layout1 = ColumnLayout(2)
+    layout1.add_to_column(0, OutputText("This is a bunch of text to see how much text we can write and if it continues to expand or not. This is a bunch of text to see how much text we can write and if it continues to expand or not. This is a bunch of text to see how much text we can write and if it continues to expand or not.")) # noqa: E501
+    layout1.add_to_column(1, OutputChart_Matplotlib(fig1))
+    # layout1.add_to_column(2, OutputText("This is a bunch of text to see how much text we can write and if it continues to expand or not. This is a bunch of text to see how much text we can write and if it continues to expand or not. This is a bunch of text to see how much text we can write and if it continues to expand or not.")) # noqa: E501
+    # layout1.add_to_column(3, OutputChart_Altair(altair_sample_chart22, chart_title= 'Test Chart Title', chart_id= 'altair_chart_5')) # noqa: E501
+
+    #### Quick test for Column Layout with 3 columns
+    layout2 = ColumnLayout(3)
+    layout2.add_to_column(0, OutputChart_Altair(altair_sample_chart2, chart_title= 'Test Chart Title', chart_id= 'altair_chart_3')) # noqa: E501
+    layout2.add_to_column(1, OutputChart_Altair(altair_sample_chart2, chart_title= 'Test Chart Title', chart_id= 'altair_chart_4')) # noqa: E501
+    layout2.add_to_column(2, OutputChart_Altair(altair_sample_chart2, chart_title= 'Test Chart Title', chart_id= 'altair_chart_54')) # noqa: E501
 
 
     ################################################################################################
@@ -102,6 +125,7 @@ def index():
     output22 = OutputTable_HTML(output_df.to_dict(orient='records'))
     output23 = OutputMarkdown("""<br /> <br /> """)
     output24 = OutputChart_Altair(altair_sample_chart, chart_title= 'Test Chart Title', chart_id= 'altair_chart_1') # noqa: E501
+    output25 = OutputChart_Altair(altair_sample_chart, chart_title= 'Test Chart Title', chart_id= 'altair_chart_2') # noqa: E501
 
     ################################################################################################
 
@@ -110,7 +134,7 @@ def index():
                              output7, output8, output9, output10, output11, output12, 
                              output13, output14, output15, output16, output17, 
                              output18, output19, output20, output21, output22, output23,
-                             output24)
+                             output24, output25, layout1, layout2)
 
     # Step 6: Render the template with the inputs and outputs
     return render_template_string(

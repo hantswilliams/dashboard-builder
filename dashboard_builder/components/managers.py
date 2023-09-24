@@ -44,6 +44,8 @@ class ComponentManager:
         self.inputs = []
         self.form_groups = []   # list to store registered form groups
         self.outputs = []
+        self.layouts = []
+
 
     def register_inputs(self, *input_components):
         """
@@ -74,16 +76,7 @@ class ComponentManager:
         for form_group in form_groups:
             self.form_groups.append(form_group)
         return self.form_groups
-
-    def render_inputs(self):
-        """
-        Render all the registered input components.
-        
-        Returns:
-        - list: List of rendered input components.
-        """
-        return [input_component.render() for input_component in self.inputs]
-
+    
     def register_output(self, output_component):
         """
         Register an output component and append it to the outputs list.
@@ -111,6 +104,28 @@ class ComponentManager:
             self.outputs.append(output_component)
         return self.outputs
     
+    def register_layouts(self, *layouts):
+        """Register one or more layouts.
+
+        Args:
+        - *layouts (ColumnLayout): The layouts to register.
+
+        Returns:
+        - list: List of registered layouts.
+        """
+        for layout in layouts:
+            self.outputs.append(layout)
+        return layouts
+    
+    def render_inputs(self):
+        """
+        Render all the registered input components.
+        
+        Returns:
+        - list: List of rendered input components.
+        """
+        return [input_component.render() for input_component in self.inputs]
+    
     def render_form_groups(self):
         rendered_form_groups = []
         for form_group in self.form_groups:
@@ -134,6 +149,9 @@ class ComponentManager:
         """
         return [output_component.render() for output_component in self.outputs]
     
+    def render_layouts(self):
+        """Render all registered layouts."""
+        return [layout.render() for layout in self.layouts]
 
 
 
