@@ -44,13 +44,16 @@ def index():
     image_value = modeded_df.iloc[0, 12]
     print(image_value)
 
-    # Step 4: Registering outputs for this request
-    manager.register_output(OutputMarkdown("""### Example Header with Markdown"""))
-    manager.register_output(OutputImage(image_value))
-    manager.register_output(OutputText(f"Number of rows returned: {modeded_df.shape[0]}")) # noqa: E501
-    manager.register_output(OutputTable_HTML(modeded_df.to_dict(orient='records')))
+    # Step 4: Create the outputs for this request
+    output_markdown = OutputMarkdown("""### Example Header with Markdown""")
+    output_image = OutputImage(image_value)
+    output_text = OutputText(f"Number of rows returned: {modeded_df.shape[0]}")
+    output_table = OutputTable_HTML(modeded_df.to_dict(orient='records'))
 
-    # Step 5: Render the template with the inputs and outputs
+    # Step 5: Register the outputs to the manager
+    manager.register_outputs(output_markdown, output_image, output_text, output_table)
+
+    # Step 6: Render the template with the inputs and outputs
     return render_template_string(
         get_dashboard_template('base'),
         form_groups=manager.render_form_groups(), 

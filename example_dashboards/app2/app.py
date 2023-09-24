@@ -63,34 +63,40 @@ def index():
     ################################################################################################
 
     ################################################################################################
-    # Step 4: Register output components to be rendered
-    manager.register_output(OutputMarkdown("""*Powered by [School of Health Professions - Applied Health Informatics](https://healthprofessions.stonybrookmedicine.edu/programs/ahi)*""")) # noqa: E501
-    manager.register_output(OutputImage("""https://www.stonybrook.edu/far-beyond/img/branding/logo/sbu/primary/300/stony-brook-university-logo-horizontal-300.png"""))
-    manager.register_output(OutputMarkdown("""---"""))
-    manager.register_output(OutputMarkdown("""# Hospital Comparison: Suffolk and Nassau County Hospital Data reported by CMS 2019""")) # noqa: E501
-    manager.register_output(OutputMarkdown("""The following data originates from [data.cms.gov](https://data.cms.gov/provider-compliance/cost-report/hospital-provider-cost-report), and is a subset of the data for Suffolk and Nassau County. The data is from 2019 and is the most recent data available. This data is gathered from the hospital annual cost report information maintained in the Healthcare Provider Cost Reporting Information System (HCRIS). The data does not contain all measures reported in the HCRIS, but rather includes a subset of commonly used measures.""")) # noqa: E501
-    manager.register_output(OutputMarkdown("""In this example, we show how visualization can be a powerful tool when exploring data. The government provides a lot of data, but it can be difficult to understand and interpret. By using visualization, we can quickly see the distribution of the data. Using  the dropdowns below, you can filter the data by hospital, number of beds, and net income. The bar chart will update to show the filtered data. The table below the chart will show the filtered data as well. The table can be sorted by clicking on the column headers.""")) # noqa: E501
-    manager.register_output(OutputMarkdown("""Please be aware that this data is for 2019 (pre-covid). Since we focus on net income, it is calculated by: subtracting Total Other Expenses (G3-Line-28-Column-1) from Total Income (G3-Line-26-Column-1) reported on the Statement of Revenues and Expenses (Worksheet-G-3).The complete data dictionary can be found [here](https://data.cms.gov/resources/hospital-provider-cost-report-data-dictionary).""")) # noqa: E501
-    manager.register_output(OutputMarkdown("""---"""))
-    manager.register_output(OutputMarkdown("""### Hospital Financial Summary Data"""))
-    manager.register_output(OutputMarkdown("""Filters Active: Hospital: **{input2_dropdown.value}** // Beds: **{input2_slider.value}** // Net Income: **{input2_radio.value}**""".format(input2_dropdown=input2_dropdown, input2_slider=input2_slider, input2_radio=input2_radio))) # noqa: E501
-    manager.register_output(OutputMarkdown("""---"""))
-    manager.register_output(OutputChart_Matplotlib(fig1))
-    manager.register_output(OutputMarkdown("""---"""))
-    manager.register_output(OutputText(f"""Percent of Total Beds in Suffolk + Nassau County: {(sum_stats_df['Percent of Total Beds'].values[0]* 100).round(2)}%""")) # noqa: E501
-    manager.register_output(OutputText(f"Percent of Total Hospitals in Suffolk + Nassau County: {(sum_stats_df['Percent of Total Hospitals'].values[0] * 100).round(2)}%")) # noqa: E501
-    manager.register_output(OutputText(f"Percent of Total Outpatient Revenue in Suffolk + Nassau County: {(sum_stats_df['Percent of Total Outpatient Revenue'].values[0] * 100).round(2)}%")) # noqa: E501
-    manager.register_output(OutputText(f"Percent of Total Inpatient Revenue in Suffolk + Nassau County: {(sum_stats_df['Percent of Total Inpatient Revenue'].values[0] * 100).round(2)}%")) # noqa: E501
-    manager.register_output(OutputText(f"Percent of Total Medicaid Charges in Suffolk + Nassau County: {(sum_stats_df['Percent of Total Medicaid Charges'].values[0] * 100).round(2)}%")) # noqa: E501
-    manager.register_output(OutputText(f"Percent of Total Net Income in Suffolk + Nassau County: {(sum_stats_df['Percent of Total Net Income'].values[0] * 100).round(2)}%")) # noqa: E501
-    manager.register_output(OutputMarkdown("""---"""))
-    manager.register_output(OutputMarkdown("""### Hospital Financial Detail Data"""))
-    manager.register_output(OutputTable_HTML(output_df.to_dict(orient='records')))
-    manager.register_output(OutputMarkdown("""<br /> <br /> """))
+    # Step 4: Create the outputs for this request
+    output1 = OutputMarkdown("""*Powered by [School of Health Professions - Applied Health Informatics](https://healthprofessions.stonybrookmedicine.edu/programs/ahi)*""") # noqa: E501
+    output2 = OutputImage("""https://www.stonybrook.edu/far-beyond/img/branding/logo/sbu/primary/300/stony-brook-university-logo-horizontal-300.png""")
+    output3 = OutputMarkdown("""---""")
+    output4 = OutputMarkdown("""# Hospital Comparison: Suffolk and Nassau County Hospital Data reported by CMS 2019""") # noqa: E501
+    output5 = OutputMarkdown("""The following data originates from [data.cms.gov](https://data.cms.gov/provider-compliance/cost-report/hospital-provider-cost-report), and is a subset of the data for Suffolk and Nassau County. The data is from 2019 and is the most recent data available. This data is gathered from the hospital annual cost report information maintained in the Healthcare Provider Cost Reporting Information System (HCRIS). The data does not contain all measures reported in the HCRIS, but rather includes a subset of commonly used measures.""") # noqa: E501
+    output6 = OutputMarkdown("""In this example, we show how visualization can be a powerful tool when exploring data. The government provides a lot of data, but it can be difficult to understand and interpret. By using visualization, we can quickly see the distribution of the data. Using  the dropdowns below, you can filter the data by hospital, number of beds, and net income. The bar chart will update to show the filtered data. The table below the chart will show the filtered data as well. The table can be sorted by clicking on the column headers.""") # noqa: E501
+    output7 = OutputMarkdown("""Please be aware that this data is for 2019 (pre-covid). Since we focus on net income, it is calculated by: subtracting Total Other Expenses (G3-Line-28-Column-1) from Total Income (G3-Line-26-Column-1) reported on the Statement of Revenues and Expenses (Worksheet-G-3).The complete data dictionary can be found [here](https://data.cms.gov/resources/hospital-provider-cost-report-data-dictionary).""") # noqa: E501
+    output8 = OutputMarkdown("""---""")
+    output9 = OutputMarkdown("""### Hospital Financial Summary Data""")
+    output10 = OutputMarkdown("""Filters Active: Hospital: **{input2_dropdown.value}** // Beds: **{input2_slider.value}** // Net Income: **{input2_radio.value}**""".format(input2_dropdown=input2_dropdown, input2_slider=input2_slider, input2_radio=input2_radio)) # noqa: E501
+    output11 = OutputMarkdown("""---""")
+    output12 = OutputChart_Matplotlib(fig1)
+    output13 = OutputMarkdown("""---""")
+    output14 = OutputText(f"""Percent of Total Beds in Suffolk + Nassau County: {(sum_stats_df['Percent of Total Beds'].values[0]* 100).round(2)}%""") # noqa: E501
+    output15 = OutputText(f"Percent of Total Hospitals in Suffolk + Nassau County: {(sum_stats_df['Percent of Total Hospitals'].values[0] * 100).round(2)}%") # noqa: E501
+    output16 = OutputText(f"Percent of Total Outpatient Revenue in Suffolk + Nassau County: {(sum_stats_df['Percent of Total Outpatient Revenue'].values[0] * 100).round(2)}%") # noqa: E501
+    output17 = OutputText(f"Percent of Total Inpatient Revenue in Suffolk + Nassau County: {(sum_stats_df['Percent of Total Inpatient Revenue'].values[0] * 100).round(2)}%") # noqa: E501
+    output18 = OutputText(f"Percent of Total Medicaid Charges in Suffolk + Nassau County: {(sum_stats_df['Percent of Total Medicaid Charges'].values[0] * 100).round(2)}%") # noqa: E501
+    output19 = OutputText(f"Percent of Total Net Income in Suffolk + Nassau County: {(sum_stats_df['Percent of Total Net Income'].values[0] * 100).round(2)}%") # noqa: E501
+    output20 = OutputMarkdown("""---""")
+    output21 = OutputMarkdown("""### Hospital Financial Detail Data""")
+    output22 = OutputTable_HTML(output_df.to_dict(orient='records'))
+    output23 = OutputMarkdown("""<br /> <br /> """)
 
     ################################################################################################
 
-    # Step 5: Render the template with the inputs and outputs
+    # Step 5: Register the outputs to the manager
+    manager.register_outputs(output1, output2, output3, output4, output5, output6, 
+                             output7, output8, output9, output10, output11, output12, 
+                             output13, output14, output15, output16, output17, 
+                             output18, output19, output20, output21, output22, output23)
+
+    # Step 6: Render the template with the inputs and outputs
     return render_template_string(
         get_dashboard_template('base'),
         form_groups=manager.render_form_groups(), 
