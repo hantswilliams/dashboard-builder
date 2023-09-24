@@ -1,10 +1,5 @@
 import pandas as pd
-import matplotlib
-matplotlib.use('Agg') # required for local development and g-shell
-import matplotlib.pyplot as plt # noqa: E402 need to import after matplotlib.use('Agg')
-
-# Use a stylesheet for a modern look
-plt.style.use('seaborn-whitegrid')
+from matplotlib.figure import Figure
 
 def process_data(df, input_values):
     hospital_name, bed_value, income_value = input_values
@@ -59,7 +54,9 @@ def process_data(df, input_values):
     sum_stats_df = pd.DataFrame(sum_stats, index=[0])
     
     def main_barchart():
-        fig, ax = plt.subplots(figsize=(10, 7))
+
+        fig = Figure(figsize=(10, 7), dpi=100)
+        ax = fig.add_subplot()
         
         # Bar colors
         main_color = '#1f75fe'  # A modern blue
@@ -89,25 +86,10 @@ def process_data(df, input_values):
         # add standard deviation to the legend
         ax.legend(frameon=True, loc='upper right')
         
-        plt.tight_layout()
+        fig.tight_layout()
         return fig
 
     fig1 = main_barchart()
-
-    # def example_pie_chart():
-    #     labels = output_df['Hospital Name'].tolist()
-    #     sizes = output_df['Net Income'].tolist()
-    #     total = sum(sizes)
-    #     sizes = [size / total for size in sizes]
-    #     sizes = [abs(size) for size in sizes]
-    #     fig, ax = plt.subplots()
-    #     ax.pie(sizes)
-    #     ax.legend(labels, loc='upper left', bbox_to_anchor=(0.85, 0.5))
-    #     plt.setp(ax.get_legend().get_texts(), fontsize='small')
-    #     return fig  # Return the figure object
-    
-    # fig2 = example_pie_chart()
-
     
     output_table_formated = output_df.copy()
     columns_to_format = ['Net Income', 'Number of Beds', 

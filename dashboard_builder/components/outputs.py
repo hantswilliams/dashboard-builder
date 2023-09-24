@@ -16,15 +16,15 @@ class OutputText:
             content=self.content)
 
 class OutputChart_Matplotlib:
-    def __init__(self, plt_object):
-        self.plt_object = plt_object
+    def __init__(self, matplob_object):
+        self.matplob_object = matplob_object
 
     def render(self):
         # Create a bytes buffer for the image to save to
         buf = io.BytesIO()
 
         # Use the provided plt object to save the figure to the buffer
-        self.plt_object.savefig(buf, format="png", bbox_inches='tight')
+        self.matplob_object.savefig(buf, format="png", bbox_inches='tight')
         buf.seek(0)
 
         # Convert bytes to a data URL (base64 encoding)

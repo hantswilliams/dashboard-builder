@@ -165,6 +165,10 @@ For each of these features, there is a default 'Select All'. So when you add in 
 
 ---
 
+## Generating charts with MatplotLib 
+
+Currently, utilizing MatplotLib - Figure (not plot) to generate the images. Plt suffers from memory leaks. Need to work on stylization of `Figure`. For a detailed summary of why we can not use matplotlib plot, please [review here](https://matplotlib.org/devdocs/gallery/user_interfaces/web_application_server_sgskip.html). 
+
 
 ## Local Dev Notes
 
