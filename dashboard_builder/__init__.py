@@ -9,7 +9,7 @@ def get_dashboard_template(template_name):
 
     Args:
     - *template_name (str): The name of the template to retrieve. 
-    For example, 'base' will retrieve the 'base.html' template from the 
+    For example, 'base' will retrieve the 'base.j2' template from the 
     dashboard builder templates directory. 
 
     Returns:

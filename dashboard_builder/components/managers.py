@@ -97,6 +97,20 @@ class ComponentManager:
         self.outputs.append(output_component)
         return output_component
     
+    def register_outputs(self, *output_components):
+        """
+        Register multiple output components and append them to the outputs list.
+        
+        Args:
+        - *output_components (BaseOutput): The output components to register.
+
+        Returns:
+        - list: List of registered output components.
+        """
+        for output_component in output_components:
+            self.outputs.append(output_component)
+        return self.outputs
+    
     def render_form_groups(self):
         rendered_form_groups = []
         for form_group in self.form_groups:
