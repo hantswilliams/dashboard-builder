@@ -2,4 +2,5 @@ requests
 flask 
 pandas 
 markdown 
+matplotlib
 dashboard-builder
