@@ -1,5 +1,14 @@
 import pandas as pd
-from matplotlib.figure import Figure
+
+import matplotlib
+matplotlib.use('Agg') # required for Flask to serve matplotlib images
+import matplotlib.pyplot as plt # noqa: E402 need to import after matplotlib.use('Agg')
+
+# Print the matplotlib style sheets
+print(plt.style.available)
+
+# Use a stylesheet for a modern look
+plt.style.use('seaborn-v0_8')
 
 def process_data(df, input_values):
     hospital_name, bed_value, income_value = input_values
@@ -55,8 +64,7 @@ def process_data(df, input_values):
     
     def main_barchart():
 
-        fig = Figure(figsize=(10, 7), dpi=100)
-        ax = fig.add_subplot()
+        fig, ax = plt.subplots(figsize=(10, 7))
         
         # Bar colors
         main_color = '#1f75fe'  # A modern blue

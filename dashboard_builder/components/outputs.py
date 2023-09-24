@@ -23,7 +23,7 @@ class OutputChart_Matplotlib:
         # Create a bytes buffer for the image to save to
         buf = io.BytesIO()
 
-        # Use the provided plt object to save the figure to the buffer
+        # Convert the plt object to a Figure, then save the figure to the buffer
         self.matplob_object.savefig(buf, format="png", bbox_inches='tight')
         buf.seek(0)
 
