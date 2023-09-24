@@ -21,6 +21,10 @@
     - Markdown 
     - Free text 
 
+- *Container Related Elements*:
+    - Column 
+    - Expander 
+
 
 **Example dashboards**: 
 
