@@ -4,9 +4,6 @@ import matplotlib
 matplotlib.use('Agg') # required for Flask to serve matplotlib images
 import matplotlib.pyplot as plt # noqa: E402 need to import after matplotlib.use('Agg')
 
-# Print the matplotlib style sheets
-print(plt.style.available)
-
 # Use a stylesheet for a modern look
 plt.style.use('seaborn-v0_8')
 

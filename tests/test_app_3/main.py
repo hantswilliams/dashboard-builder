@@ -1,6 +1,7 @@
 from flask import Flask, render_template_string, request
 import pandas as pd
 from helper_functions import process_data
+import altair as alt
 
 #### For local dev testing....//otherwise turn off - comment out below ###
 import os 
@@ -11,7 +12,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../.
 from dashboard_builder import get_dashboard_template  # noqa: E402
 from dashboard_builder.config import Config # noqa: E402
 from dashboard_builder.components.inputs import InputDropdown, InputSlider_Categorical, InputRadio # noqa: E402, E501
-from dashboard_builder.components.outputs import OutputText, OutputChart_Matplotlib, OutputTable_HTML, OutputImage, OutputMarkdown # noqa: E501, E402
+from dashboard_builder.components.outputs import OutputText, OutputChart_Matplotlib, OutputChart_Altair, OutputTable_HTML, OutputImage, OutputMarkdown # noqa: E501, E402
 from dashboard_builder.components.managers import ComponentManager, FormGroup # noqa: E402, E501
 
 app = Flask(__name__)
@@ -62,6 +63,19 @@ def index():
     output_df, sum_stats_df, fig1 = process_data(df, [input2_dropdown.value, input2_slider.value, input2_radio.value]) # noqa: E501
     ################################################################################################
 
+
+    ### Quick test
+    source = pd.DataFrame({
+        'a': ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
+        'b': [28, 55, 43, 91, 81, 53, 19, 87, 52]
+    })
+
+    altair_sample_chart = alt.Chart(source, width=250, height=250).mark_bar().encode(
+        x='a',
+        y='b'
+    )
+
+
     ################################################################################################
     # Step 4: Create the outputs for this request
     output1 = OutputMarkdown("""*Powered by [School of Health Professions - Applied Health Informatics](https://healthprofessions.stonybrookmedicine.edu/programs/ahi)*. Source Code for Dashboard: [Github](https://github.com/hantswilliams/dashboard-builder/tree/main/example_dashboards/app2)""") # noqa: E501
@@ -87,6 +101,7 @@ def index():
     output21 = OutputMarkdown("""### Hospital Financial Detail Data""")
     output22 = OutputTable_HTML(output_df.to_dict(orient='records'))
     output23 = OutputMarkdown("""<br /> <br /> """)
+    output24 = OutputChart_Altair(altair_sample_chart, chart_title= 'Test Chart Title', chart_id= 'altair_chart_1') # noqa: E501
 
     ################################################################################################
 
@@ -94,7 +109,8 @@ def index():
     manager.register_outputs(output1, output2, output3, output4, output5, output6, 
                              output7, output8, output9, output10, output11, output12, 
                              output13, output14, output15, output16, output17, 
-                             output18, output19, output20, output21, output22, output23)
+                             output18, output19, output20, output21, output22, output23,
+                             output24)
 
     # Step 6: Render the template with the inputs and outputs
     return render_template_string(

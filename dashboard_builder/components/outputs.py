@@ -3,6 +3,7 @@
 from flask import render_template_string
 import io
 import base64
+import json
 from markdown import markdown
 from ..utils import get_jinja_subtemplate
 
@@ -36,6 +37,21 @@ class OutputChart_Matplotlib:
         return render_template_string(
             get_jinja_subtemplate("outputs/outputchart_matplotlib.j2"),
             image=data_url)
+
+
+class OutputChart_Altair:
+    def __init__(self, altair_chart, chart_title, chart_id):
+        self.altair_chart = altair_chart
+        self.chart_title = chart_title
+        self.chart_id = chart_id
+
+    def render(self):
+        chart_json = json.dumps(self.altair_chart.to_dict())
+        
+        return render_template_string(
+            get_jinja_subtemplate("outputs/outputchart_altair.j2"),
+            chart_json=chart_json, chart_title = self.chart_title,
+            chart_id=self.chart_id)
 
 
 class OutputTable_HTML:
