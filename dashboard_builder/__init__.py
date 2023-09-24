@@ -12,6 +12,12 @@ def get_dashboard_template(template_name):
     For example, 'base' will retrieve the 'base.j2' template from the 
     dashboard builder templates directory. 
 
+    Currently you have two options:
+    - 'base': This is a template that contains a sidebar and a main content area. 
+    This should be used if you want interactive widgets in the sidebar.
+    - 'base_no_sidebar': This is a template that contains only a main content area. 
+    This should be used if you do not want a sidebar with interactive inputs. 
+
     Returns:
     - str: The content of the template. 
 

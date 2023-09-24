@@ -86,11 +86,11 @@ def index():
     )
 
     ### Quick test for Column Layout with 4 columns
-    layout1 = ColumnLayout(2)
+    layout1 = ColumnLayout(4)
     layout1.add_to_column(0, OutputText("This is a bunch of text to see how much text we can write and if it continues to expand or not. This is a bunch of text to see how much text we can write and if it continues to expand or not. This is a bunch of text to see how much text we can write and if it continues to expand or not.")) # noqa: E501
     layout1.add_to_column(1, OutputChart_Matplotlib(fig1))
-    # layout1.add_to_column(2, OutputText("This is a bunch of text to see how much text we can write and if it continues to expand or not. This is a bunch of text to see how much text we can write and if it continues to expand or not. This is a bunch of text to see how much text we can write and if it continues to expand or not.")) # noqa: E501
-    # layout1.add_to_column(3, OutputChart_Altair(altair_sample_chart22, chart_title= 'Test Chart Title', chart_id= 'altair_chart_5')) # noqa: E501
+    layout1.add_to_column(2, OutputText("This is a bunch of text to see how much text we can write and if it continues to expand or not. This is a bunch of text to see how much text we can write and if it continues to expand or not. This is a bunch of text to see how much text we can write and if it continues to expand or not.")) # noqa: E501
+    layout1.add_to_column(3, OutputChart_Altair(altair_sample_chart22, chart_title= 'Test Chart Title', chart_id= 'altair_chart_5')) # noqa: E501
 
     #### Quick test for Column Layout with 3 columns
     layout2 = ColumnLayout(3)
