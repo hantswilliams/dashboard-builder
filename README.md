@@ -29,7 +29,7 @@
 
 **Example dashboards**: 
 
-1. Complex example of Hospital and Centers for Medicare and Medicaid (CMS) Data for Long Island, New York. It is deployed via Vercel, [please click here](https://dashboard-builder-nyhospitals.appliedhealthinformatics.com). The associated github source code for this repo can found here [https://github.com/hantswilliams/dashboard-builder-example-1](https://github.com/hantswilliams/dashboard-builder-example-1). 
+1. Complex example of Hospital and Centers for Medicare and Medicaid (CMS) Data for Long Island, New York. It is deployed via Vercel, [please click here](https://dashboard-builder-nyhospitals.appliedhealthinformatics.com). The associated github source code for this repo can found here [https://github.com/hantswilliams/dashboard-builder-cms-longisland](https://github.com/hantswilliams/dashboard-builder-cms-longisland). 
 
 ## To do: 
 - [x] Address matplotlib issue for rendering on web framework
