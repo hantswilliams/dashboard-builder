@@ -1,13 +1,13 @@
 {
     "builds": [
       {
-        "src": "example_dashboards/app2/main.py",
+        "src": "./example_dashboards/app2/main.py",
         "use": "@vercel/python"
       }
     ],
     "routes": [
       {
-        "src": "example_dashboards/app2/(.*)",
+        "src": "./example_dashboards/app2/(.*)",
         "dest": "main.py"
       }
     ]
