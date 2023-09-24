@@ -7,6 +7,22 @@
 
 *About*: Inspired by Shiny and Streamlit, this is currently a flask focused python library to help assist with fast dashboarding. While Streamlit and Shiny are highly opinioned, this approach brings the dashboarding functionality (limited right now) to your flask environment, allowing you the freedom to further create and curate the application as you please. In the future, I imagine create a version that is also capable of being embedded into a Django or FastAPI web framework. 
 
+
+## To do: 
+- [x] Add initial input components
+- [x] Add initial output components
+- [x] Create test files 
+- [x] Add github actions for linting and secret checks
+- [x] Create build script 
+- [x] Create at least one basic 'base' template for the dashboard view 
+- [x] Incorporate some form of state management system 
+- [x] Create a simple app example; found [here](/example_dashboards/app1/)
+- [x] Create a more complex app example; found [here](/example_dashboards/app2/)
+- [ ] Update below markdown/readme, double check it to make sure aligns with API 
+- [ ] Create docusuraus documentation site 
+- [ ] Create video tutorials 
+---
+
 ---
 
 ## Component Manager
@@ -64,15 +80,21 @@ By using the `ComponentManager`, you can ensure a structured and streamlined app
 
 ## Installation 
 
+### Pip
 ```bash
-pip install ???_flask_dashboard_???
+pip install dashboard-builder
+```
+
+### Poetry
+```bash
+poetry add dashboard-builder
 ```
 
 ## How to: 
 
 1. **LOAD LIBRARY**: First load in the library at the top of you app file. In a basic example, it might look like this:
 ```python
-from flask_dashboard import get_template
+from flask_dashboard import get_dashboard_template
 from flask_dashboard.components.inputs import InputDropdown
 from flask_dashboard.components.outputs import OutputText, OutputChart_Matplotlib, OutputTable_HTML, OutputImage, OutputMarkdown
 from flask_dashboard.components.managers import ComponentManager, FormGroup
@@ -122,7 +144,7 @@ Finally, after this step, you then being together all of the inputs and outputs,
 
 ```python
     return render_template_string(
-        get_template('base.html'),
+        get_dashboard_template('base'),
         form_groups=manager.render_form_groups(), 
         output_components=manager.render_outputs()
     )
@@ -142,15 +164,6 @@ For each of these features, there is a default 'Select All'. So when you add in 
 
 ---
 
-## To do: 
-- [x] Add initial input components
-- [x] Add initial output components
-- [x] Create at least one basic .html template for the dashboard view 
-- [ ] Incorporate statement system 
-- [ ] Incorporate loggin 
-- [ ] Incorporate user login / RBAC 
-
----
 
 ## Local Dev Notes
 
