@@ -3,6 +3,7 @@
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 ![Ruff Linting](https://github.com/hantswilliams/dashboard-builder/actions/workflows/ruff.yml/badge.svg)
 ![Truffle Hog](https://github.com/hantswilliams/dashboard-builder/actions/workflows/trufflehog.yml/badge.svg)
+[![Lisence: apache-2](https://img.shields.io/badge/Lisence:-Apache%202-red)](https://github.com/apache/.github/blob/main/LICENSE)
 
 
 *About*: Inspired by Shiny and Streamlit, this is currently a flask focused python library to help assist with fast dashboarding. While Streamlit and Shiny are highly opinioned, this approach brings the dashboarding functionality (limited right now) to your flask environment, allowing you the freedom to further create and curate the application as you please. In the future, I imagine create a version that is also capable of being embedded into a Django or FastAPI web framework. 
