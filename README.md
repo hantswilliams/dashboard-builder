@@ -9,6 +9,7 @@
 
 
 ## To do: 
+- [ ] Need to figure out matplot lib, looks like need to use `Figure` and not plt. Instructions here: https://matplotlib.org/devdocs/gallery/user_interfaces/web_application_server_sgskip.html
 - [x] Add initial input components
 - [x] Add initial output components
 - [x] Create test files 
