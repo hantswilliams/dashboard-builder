@@ -7,10 +7,12 @@
 
 *About*: Inspired by Shiny and Streamlit, this is currently a flask focused python library to help assist with fast dashboarding. While Streamlit and Shiny are highly opinioned, this approach brings the dashboarding functionality (limited right now) to your flask environment, allowing you the freedom to further create and curate the application as you please. In the future, I imagine create a version that is also capable of being embedded into a Django or FastAPI web framework. 
 
-To see a working version of the dashboard builder in application that is deployed via Vercel, [please click here](https://dashboard-builder-nyhospitals.appliedhealthinformatics.com). The associated github source code for this repo can found here [https://github.com/hantswilliams/dashboard-builder-example-1](https://github.com/hantswilliams/dashboard-builder-example-1). 
+**Example dashboards**: 
+
+1. Complex example of Hospital and Centers for Medicare and Medicaid (CMS) Data for Long Island, New York. It is deployed via Vercel, [please click here](https://dashboard-builder-nyhospitals.appliedhealthinformatics.com). The associated github source code for this repo can found here [https://github.com/hantswilliams/dashboard-builder-example-1](https://github.com/hantswilliams/dashboard-builder-example-1). 
 
 ## To do: 
-- [ ] Need to figure out matplot lib, looks like need to use `Figure` and not plt. Instructions here: https://matplotlib.org/devdocs/gallery/user_interfaces/web_application_server_sgskip.html
+- [x] Address matplotlib issue for rendering on web framework
 - [x] Add initial input components
 - [x] Add initial output components
 - [x] Create test files 
