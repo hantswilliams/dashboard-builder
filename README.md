@@ -9,6 +9,7 @@
 *About*: Inspired by Shiny and Streamlit, this is currently a flask focused python library to help assist with fast dashboarding. While Streamlit and Shiny are highly opinioned, this approach brings the dashboarding functionality (limited right now) to your flask environment, allowing you the freedom to further create and curate the application as you please. In the future, I imagine create a version that is also capable of being embedded into a Django or FastAPI web framework. 
 
 **Key Features**: 
+
 - *Input Elements*: 
     - Single select 
     - Radio button 
@@ -25,6 +26,15 @@
 - *Container Related Elements*:
     - Column 
     - Expander 
+
+- Default and custom templates 
+    - Currently have two default templates to choose between for a dashboard page: 
+        - `base`: contains a side-bar (on left hand side for placing interactive widgets) and a main output view
+        - `base_nosidebar`: contains a main output view only, no side bar; helpful for view-only dashboards with no need to interactivity
+    - Custom Templates 
+        - You can create your own custom template and load it in. Generally speaking, you can make the template look however you want. 
+        - The default base template that we use, that you can modify however you want is [found here](https://github.com/hantswilliams/dashboard-builder/blob/main/dashboard_builder/dashboard_templates/base.j2)
+        - You can then then set the custom folder where the template exists with the `dashboard_builder.config` parameter, and then call the `get_dashboard_template_custom` function to use your own template!  
 
 
 **Example dashboards**: 

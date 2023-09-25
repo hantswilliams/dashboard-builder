@@ -32,13 +32,17 @@ FORM_GROUP_TEMPLATE = """
 
 
 class ComponentManager:
+    """
+    Manages components (inputs, outputs, and layouts) for a dashboard or view.
+    This class facilitates registering, updating, and rendering components.
+    """
     def __init__(self, request):
         """
-        Initialize the ComponentManager with a request object 
-        to handle input components.
+        Initialize the ComponentManager with a request object to handle 
+        input components.
         
         Args:
-        - request (flask.Request): The current Flask request object.
+            request (flask.Request): The current Flask request object.
         """
         self.request = request
         self.inputs = []
@@ -127,6 +131,17 @@ class ComponentManager:
         return [input_component.render() for input_component in self.inputs]
     
     def render_form_groups(self):
+        """
+        Render each form group in the form_groups list as an HTML string.
+        
+        For each form group, the method:
+        1. Renders its input components.
+        2. Converts markdown content to HTML.
+        3. Renders the entire form group with the provided FORM_GROUP_TEMPLATE.
+
+        Returns:
+        - list: List of rendered HTML strings for each form group.
+        """
         rendered_form_groups = []
         for form_group in self.form_groups:
             inputs = [input_component.render() for input_component in form_group.inputs]
@@ -156,13 +171,21 @@ class ComponentManager:
 
 
 class FormGroup:
+    """
+    Represents a form group that can contain multiple input components 
+    and optional markdown content at the top and bottom.
+    """
     def __init__(self, action_url='/', markdown_top=None, markdown_bottom=None):
         """
-        :param action_url: URL to which the form data should be posted.
-        :param markdown_top: Optional markdown content to be 
-        displayed at the top of the section.
-        :param markdown_bottom: Optional markdown content to be 
-        displayed at the bottom of the section.
+        Initializes a FormGroup with an action URL and optional markdown content.
+
+        Args:
+            action_url (str, optional): URL to which the form data should be posted. 
+                Defaults to '/'.
+            markdown_top (str, optional): Markdown content to be displayed at the 
+                top of the section. Defaults to None.
+            markdown_bottom (str, optional): Markdown content to be displayed at 
+                the bottom of the section. Defaults to None.
         """
         self.action_url = action_url
         self.inputs = []
