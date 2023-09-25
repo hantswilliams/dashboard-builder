@@ -29,7 +29,8 @@ class ColumnLayout:
     def render(self):
         """
         Render the entire column layout as an HTML string. 
-        Each component in the column will be rendered and added to its respective column.
+        Each component in the column will be rendered and added to its 
+        respective column.
 
         Returns:
             str: HTML representation of the column layout with all the added components.

@@ -2,6 +2,7 @@
 
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 ![Ruff Linting](https://github.com/hantswilliams/dashboard-builder/actions/workflows/ruff.yml/badge.svg)
+![Google Doc Strings](https://img.shields.io/badge/Doc_Strings-Google-blue)
 ![Truffle Hog](https://github.com/hantswilliams/dashboard-builder/actions/workflows/trufflehog.yml/badge.svg)
 [![Lisence: apache-2](https://img.shields.io/badge/Lisence:-Apache%202-red)](https://github.com/apache/.github/blob/main/LICENSE)
 
