@@ -4,6 +4,7 @@ version = "0.3.2"
 description = "A lightweight dashboard builder for data scientists."
 authors = ["Hants Williams <hantsawilliams@gmail.com>"]
 readme = "README.md"
+exclude = ["tests", "docs", "notebooks"]
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.13"

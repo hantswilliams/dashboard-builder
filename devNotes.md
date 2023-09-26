@@ -11,9 +11,21 @@ poetry run pytest
 
 ## Documentation
 
+Note for below - should just put this inside of the `build.bash` script so it automatically deploys and creates an updated version of the documentation so everything stays in sync.
+
 Using mkdocs for autodocumentation of key components and features. Mostly utilized based off of [this tutorial](https://realpython.com/python-project-documentation-with-mkdocs/#step-4-prepare-your-documentation-with-mkdocs). Can run the demo instance with:
 ```bash
 poetry run mkdocs server
+```
+
+To build:
+```bash
+poetry run mkdocs build
+```
+
+Then to deploy the build to github:
+```bash
+poetry run mkdocs gh-deploy
 ```
 
 ## Poetry and Deployment 
