@@ -8,8 +8,8 @@ from matplotlib.figure import Figure # noqa: E402
 
 
 #### For local dev testing....//otherwise turn off - comment out below ###
-import os 
-import sys
+import os # noqa
+import sys # noqa 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 ##########################################################################
 

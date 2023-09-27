@@ -30,6 +30,7 @@ poetry run mkdocs gh-deploy
 
 Quick notes for where to find additional help for specific parts of the documentation process: 
     - [Sharing Code](https://squidfunk.github.io/mkdocs-material/reference/code-blocks/)
+    - [Snippets of Code](https://facelessuser.github.io/pymdown-extensions/extensions/snippets/)
 
 ## Poetry and Deployment 
 
