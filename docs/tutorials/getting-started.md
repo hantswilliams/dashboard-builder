@@ -8,7 +8,7 @@ Welcome to the getting started guide for Dashboard Builder. In this first brief 
 
 ---
 
-![Flask Image](./images/condition_counts.png)
+![Flask Image](../images/condition_counts.png)
 
 ---
 

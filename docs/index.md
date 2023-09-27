@@ -1,5 +1,4 @@
-# Dashboard Builder  
-
+# Dashboard Builder (Version: Alpha)
 
 The `dashboard-builder` is a Python package designed to help you create interactive web dashboards with minimal effort, while still giving you *full access* to the underlining web framework supporting it - which is [Flask](https://flask.palletsprojects.com/). So whether you're looking to visualize datasets, create dynamic reports, or provide interactive analytics, this library streamlines the process, letting you focus on the data and logic, while it takes care of the presentation.
 
@@ -38,7 +37,7 @@ For more detailed guides, usage examples, and API reference, navigate to the res
 
 ## Next Steps:
 
-1. [**Getting Started**:](./getting-started.md) Learn the basics of setting up your first dashboard.
+1. [**Getting Started**:](../docs/tutorials/getting-started.md) Learn the basics of setting up your first dashboard.
 2. **Components**: Dive deep into the various components and widgets available.
 3. **Layouts & Templates**: Understand how to customize and layout your dashboards.
 4. **Advanced Topics**: Dive deeper into more advanced functionalities and custom integrations.
