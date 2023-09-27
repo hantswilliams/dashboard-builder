@@ -1,45 +1,53 @@
-# Welcome to MkDocs
+# Dashboard Builder  
 
-``` mermaid
-sequenceDiagram
-  autonumber
-  Alice->>John: Hello John, how are you?
-  loop Healthcheck
-      John->>John: Fight against hypochondria
-  end
-  Note right of John: Rational thoughts!
-  John-->>Alice: Great!
-  John->>Bob: How about you?
-  Bob-->>John: Jolly good!
+
+The `dashboard-builder` is a Python package designed to help you create interactive web dashboards with minimal effort, while still giving you *full access* to the underlining web framework supporting it - which is [Flask](https://flask.palletsprojects.com/). So whether you're looking to visualize datasets, create dynamic reports, or provide interactive analytics, this library streamlines the process, letting you focus on the data and logic, while it takes care of the presentation.
+
+Our intended audience for this tool are python developers or data scientists that needs direct access to the web framework (e.g., [Flask](https://flask.palletsprojects.com/)) because of large amounts of custom code or required functionality, but still want a simple way of creating dashboards, similar to [Streamlit](https://streamlit.io/), [Dash](https://plotly.com/dash/) or [Shiny](https://shiny.posit.co/py/) - which make it harder to configure or customize the web framework. Flask is one of the most un-oppinionated web frameworks for python, which makes it a great choice. 
+
+## Features
+- **Easy Integration**: Designed with simplicity in mind, integrate `dashboard-builder` into your existing Python projects in minutes.
+- **Interactive Widgets**: From drop-downs to sliders, offer dynamic input options to users.
+- **Customizable Layouts**: Control the layout and presentation of your dashboards.
+- **Extendable with Custom Templates**: Need a unique look? Integrate your own templates easily.
+
+!!! note "Alpha Release"
+    Dashboard Builder is currently in Alpha and is not yet ready for production purposes. We are working hard to finalize unit and E2E testing. We expect to have a production ready release by November 1, 2023. Stay tuned.  
+
+## Installation
+
+To install `dashboard-builder`, you can use pip:
+
+```bash 
+pip install dashboard-builder
 ```
 
-This site contains the project documentation for the
-`calculator` project that is a toy module used in the
-Real Python tutorial
-[Build Your Python Project Documentation With MkDocs](
-    https://realpython.com/python-project-documentation-with-mkdocs/).
-Its aim is to give you a framework to build your
-project documentation using Python, MkDocs,
-mkdocstrings, and the Material for MkDocs theme.
+## Quick Start
 
-## Table Of Contents
+After installation, you can quickly set up a basic dashboard:
 
-The documentation follows the best practice for
-project documentation as described by Daniele Procida
-in the [Diátaxis documentation framework](https://diataxis.fr/)
-and consists of four separate parts:
+```python title="app.py"
+from dashboard_builder import ...
 
-1. [Tutorials](tutorials.md)
-2. [How-To Guides](how-to-guides.md)
-3. [Reference](reference.md)
-4. [Explanation](explanation.md)
+# Your code to create a dashboard
+```
 
-Quickly find what you're looking for depending on
-your use case by looking at the different pages.
+For more detailed guides, usage examples, and API reference, navigate to the respective sections in the documentation.
 
-## Acknowledgements
+---
 
-I want to thank my house plants for providing me with
-a negligible amount of oxygen each day. Also, I want
-to thank the sun for providing more than half of their
-nourishment free of charge.
+## Next Steps:
+
+1. [**Getting Started**:](./getting-started.md) Learn the basics of setting up your first dashboard.
+2. **Components**: Dive deep into the various components and widgets available.
+3. **Layouts & Templates**: Understand how to customize and layout your dashboards.
+4. **Advanced Topics**: Dive deeper into more advanced functionalities and custom integrations.
+
+---
+
+Feel free to reach out for support or suggest features on our [GitHub repository](https://github.com/your_github/dashboard-builder).
+
+---
+
+
+

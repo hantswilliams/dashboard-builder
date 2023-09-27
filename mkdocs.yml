@@ -1,7 +1,9 @@
-site_name: Dashboad Builder Documentation
+site_name: Dashboad Builder 
 
 theme:
   name: "material"
+  features:
+    - content.code.copy
 
 plugins:
 - mkdocstrings:
@@ -11,6 +13,8 @@ plugins:
           docstring_style: google
 
 markdown_extensions:
+  - admonition
+  - pymdownx.snippets
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
@@ -18,9 +22,16 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
 
 nav:
-  - Calculation Docs: index.md
-  - tutorials.md
-  - How-To Guides: how-to-guides.md
-  - reference.md
-  - explanation.md
-  - Components: components.md
+  - Welcome: index.md
+  - Getting Started: tutorials/getting-started.md
+  - API: 
+    - Configuration: classes/configuration.md
+    - Inputs: 
+        - Classes: classes/component_input.md
+        - Templates: templates/templates_input.md
+    - Outputs: 
+        - Classes: classes/component_output.md
+        - Templates: templates/templates_output.md
+    - Layouts: 
+        - Classes: classes/layouts.md
+        - Templates: templates/templates_layout.md

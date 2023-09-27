@@ -1,5 +1,11 @@
 from flask import Flask, render_template_string, request
-from matplotlib.figure import Figure
+
+import matplotlib
+matplotlib.use('Agg') # required for Flask to serve matplotlib images
+import matplotlib.pyplot as plt # noqa: E402 need to import after matplotlib.use('Agg')
+from matplotlib.figure import Figure # noqa: E402
+
+
 
 #### For local dev testing....//otherwise turn off - comment out below ###
 import os 
@@ -30,6 +36,39 @@ def index():
     ax.plot([1, 2, 3])
 
     manager.register_outputs(OutputChart_Matplotlib(fig))
+
+    print('Page Manager Contents from /: ', fig)
+
+    return render_template_string(
+        # get_dashboard_template('base'),
+        get_dashboard_template_custom('my_custom_template.j2', dashboard_settings),
+        output_components=manager.render_outputs(),
+        settings=dashboard_settings
+    )
+
+@app.route('/page', methods=['GET', 'POST'])
+def index2():
+
+    manager = ComponentManager(request)
+
+    # Generate the figure **without using pyplot**.
+    fig, ax = plt.subplots()
+
+    fruits = ['apple', 'blueberry', 'cherry', 'orange']
+    counts = [40, 100, 30, 55]
+    bar_labels = ['red', 'blue', '_red', 'orange']
+    bar_colors = ['tab:red', 'tab:blue', 'tab:red', 'tab:orange']
+
+    ax.bar(fruits, counts, label=bar_labels, color=bar_colors)
+
+    ax.set_ylabel('fruit supply')
+    ax.set_title('Fruit supply by kind and color')
+    ax.legend(title='Fruit color')
+
+    manager.register_outputs(OutputChart_Matplotlib(fig))
+
+    ## print the contents of the manager in the terminal
+    print('Page Manager Contents from /page: ', fig)
 
     return render_template_string(
         # get_dashboard_template('base'),

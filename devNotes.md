@@ -15,7 +15,7 @@ Note for below - should just put this inside of the `build.bash` script so it au
 
 Using mkdocs for autodocumentation of key components and features. Mostly utilized based off of [this tutorial](https://realpython.com/python-project-documentation-with-mkdocs/#step-4-prepare-your-documentation-with-mkdocs). Can run the demo instance with:
 ```bash
-poetry run mkdocs server
+poetry run mkdocs serve
 ```
 
 To build:
@@ -27,6 +27,9 @@ Then to deploy the build to github:
 ```bash
 poetry run mkdocs gh-deploy
 ```
+
+Quick notes for where to find additional help for specific parts of the documentation process: 
+    - [Sharing Code](https://squidfunk.github.io/mkdocs-material/reference/code-blocks/)
 
 ## Poetry and Deployment 
 

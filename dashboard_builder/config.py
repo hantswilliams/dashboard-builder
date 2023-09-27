@@ -1,5 +1,5 @@
 class Config:
-    """ Dashboard Configuration Class."""
+    """ Dashboard Configuration Class."""   
     def __init__(self, custom_template_dir: str = "templates", footer_text: str = ""):
         """
         Initializes a new instance of the Config class.
@@ -11,8 +11,14 @@ class Config:
                 the dashboard. Defaults to an empty string.
 
         Example:
-            >>> config = Config(custom_template_dir="my_templates", 
-                    footer_text="My Dashboard") 
+            >>> Example:
+
+                from dashboard_builder.config import Config
+                
+                config = Config(
+                    custom_template_dir="my_templates", 
+                    footer_text="My Dashboard"
+                ) 
 
         """
         self.custom_template_dir = custom_template_dir

@@ -7,9 +7,18 @@
 [![Lisence: apache-2](https://img.shields.io/badge/Lisence:-Apache%202-red)](https://github.com/apache/.github/blob/main/LICENSE)
 
 
-*About*: Inspired by Shiny and Streamlit, this is currently a flask focused python library to help assist with fast dashboarding. While Streamlit and Shiny are highly opinioned, this approach brings the dashboarding functionality (limited right now) to your flask environment, allowing you the freedom to further create and curate the application as you please. In the future, I imagine create a version that is also capable of being embedded into a Django or FastAPI web framework. 
+The `dashboard-builder` is a Python package designed to help you create interactive web dashboards with minimal effort, while still giving you *full access* to the underlining web framework supporting it - which is [Flask](https://flask.palletsprojects.com/). So whether you're looking to visualize datasets, create dynamic reports, or provide interactive analytics, this library streamlines the process, letting you focus on the data and logic, while it takes care of the presentation.
+
+Our intended audience for this tool are python developers or data scientists that needs direct access to the web framework (e.g., [Flask](https://flask.palletsprojects.com/)) because of large amounts of custom code or required functionality, but still want a simple way of creating dashboards, similar to [Streamlit](https://streamlit.io/), [Dash](https://plotly.com/dash/) or [Shiny](https://shiny.posit.co/py/) - which make it harder to configure or customize the web framework. Flask is one of the most un-oppinionated web frameworks for python, which makes it a great choice.
 
 **Key Features**: 
+
+- *No coding for HTML, CSS, or JS* 
+    - Use default templates - no knowledge of any other language is necessary! Just pure python 
+    - If you are comfortable with creating your own templates, you have the ability to do so! 
+
+- *Styling*: 
+    - Dynmic, mobile friendly, and colorful (powered by Tailwind)
 
 - *Input Elements*: 
     - Single select 

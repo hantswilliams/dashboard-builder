@@ -49,6 +49,16 @@ class InputDropdown(BaseInput):
         Raises:
             ValueError: If the provided values are neither a list nor a tuple of 
             DataFrame and column name.
+
+        >>> Example:
+
+            from dashboard_builder.components.inputs import InputDropdown
+            
+            input_dropdown = InputDropdown(
+                name='unique_name', 
+                label='Select a X:', 
+                values=(df, 'name_of_column')) 
+
         """
         super().__init__(name, selected_value)
         
