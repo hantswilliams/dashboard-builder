@@ -3,6 +3,14 @@
 from flask import render_template_string
 from markdown import markdown
 
+from .inputs import (
+    InputDropdown,
+    InputSlider_Numerical,
+    InputSlider_Categorical,
+    InputRadio,
+    TextInput
+)
+
 
 FORM_GROUP_TEMPLATE = """
 <form method="post" action="{{ action_url }}">
@@ -30,8 +38,58 @@ FORM_GROUP_TEMPLATE = """
 """
 
 
-
 class ComponentManager:
+
+    _registry = {}  # to keep track of available input types
+
+    @classmethod
+    def register_component(cls, component_type, component_class):
+        """Register an input component type with the manager."""
+        cls._registry[component_type] = component_class
+
+    @classmethod
+    def create_component(cls, component_type, *args, **kwargs):
+        """Factory method to create and return an instance of an input component."""
+        if component_type not in cls._registry:
+            raise ValueError(f"No component type {component_type} registered.")
+        
+        component_class = cls._registry[component_type]
+        return component_class(*args, **kwargs)
+
+    @classmethod
+    def create_form_group(cls, manager_instance, action_url, markdown_top, markdown_bottom, inputs): # noqa
+        """
+        Create a form group with various input types.
+
+        Args:
+        - manager_instance (ComponentManager): An instance of ComponentManager 
+            to register inputs and form groups. 
+        - action_url (str): The URL the form should post to.
+        - markdown_top (str): Markdown content to display at the top of the form group.
+        - markdown_bottom (str): Markdown content to display at the bottom of the 
+            form group.
+        - inputs (list): List of dictionaries describing each input 
+            component.
+
+        Returns:
+        - FormGroup: The created FormGroup instance.
+        """
+        form_group = FormGroup(action_url=action_url, markdown_top=markdown_top, markdown_bottom=markdown_bottom) # noqa
+        
+        # Create and add inputs based on the 'inputs' parameter
+        for input_data in inputs:
+            input_type = input_data.pop('type')  # Extract the 'type' key and remove it from the dictionary # noqa
+            input_component = cls.create_component(input_type, **input_data)
+            form_group.add_inputs(input_component)
+            manager_instance.register_inputs(input_component)
+
+        # Register the form group
+        manager_instance.register_form_groups(form_group)
+        
+        return form_group
+
+
+
     """
     Manages components (inputs, outputs, and layouts) for a dashboard or view.
     This class facilitates registering, updating, and rendering components.
@@ -168,8 +226,6 @@ class ComponentManager:
         """Render all registered layouts."""
         return [layout.render() for layout in self.layouts]
 
-
-
 class FormGroup:
     """
     Represents a form group that can contain multiple input components 
@@ -192,6 +248,18 @@ class FormGroup:
         self.markdown_top = markdown_top
         self.markdown_bottom = markdown_bottom
 
+
+    def get_input(self, input_name):
+        """Retrieve an input component by its name."""
+        for input_component in self.inputs:
+            if input_component.name == input_name:
+                return input_component
+        raise ValueError(f"No input with name {input_name} found in the form group.")
+
+    def add_input(self, input_component):
+        """Add a single input component to the form group."""
+        self.inputs.append(input_component)
+
     def add_inputs(self, *input_components):
         """
         Add multiple input components to the form group.
@@ -204,3 +272,30 @@ class FormGroup:
         """
         for input_component in input_components:
             self.inputs.append(input_component)
+
+    def create_form_group(self, action_url, markdown_top, markdown_bottom, inputs):
+        # Create the form group
+        form_group = FormGroup(action_url=action_url, markdown_top=markdown_top, markdown_bottom=markdown_bottom) # noqa 
+        
+        # Create and add inputs based on the inputs parameter
+        for input_data in inputs:
+            if input_data['type'] == 'dropdown':
+                input_component = InputDropdown(
+                    name=input_data['name'], 
+                    label=input_data['label'], 
+                    values=input_data['values']
+                )
+                form_group.add_inputs(input_component)
+                self.register_inputs(input_component)
+
+        # Register the form group
+        self.register_form_groups(form_group)
+        
+        return form_group
+    
+
+ComponentManager.register_component('dropdown', InputDropdown)
+ComponentManager.register_component('text', TextInput)
+ComponentManager.register_component('slider_numerical', InputSlider_Numerical)
+ComponentManager.register_component('slider_categorical', InputSlider_Categorical)
+ComponentManager.register_component('radio', InputRadio)
