@@ -25,20 +25,7 @@ fi
 # Construct the new version
 new_version="$major.$minor.$patch"
 
-# Replace the old version with the new version in pyproject.toml
-sed -i.bak "s/version = \"$version\"/version = \"$new_version\"/g" pyproject.toml
-
 # Update the version in docs/index.md
 sed -i.bak "s/version = \"$version\"/version = \"$new_version\"/g" docs/index.md
 
-# Publish to PYPI with poetry
-poetry publish --build
-
-# Commit the changes
-git add .
-git commit -m "Version $new_version"
-git push 
-
-# Remove the backup files created by sed
-rm pyproject.toml.bak
 rm docs/index.md.bak
