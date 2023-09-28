@@ -28,10 +28,10 @@ nav:
     - Configuration: classes/configuration.md
     - Inputs: 
         - Classes: classes/component_input.md
-        - Templates: templates/templates_input.md
+        - Templates: jinja/input.md
     - Outputs: 
         - Classes: classes/component_output.md
-        - Templates: templates/templates_output.md
+        - Templates: jinja/output.md
     - Layouts: 
         - Classes: classes/layouts.md
-        - Templates: templates/templates_layout.md
+        - Templates: jinja/layout.md

@@ -381,6 +381,6 @@ Congrats on finishing!
 
 ## Next 
 
-For advanced tutorials and more examples, visit the [Examples](/examples) page. If you face any issues not addressed here, check our [FAQs](/faqs) or raise an issue on our [GitHub repository](https://github.com/your_github/dashboard-builder).
+If you face any issues not addressed here, please raise an issue on our [GitHub repository](https://github.com/your_github/dashboard-builder).
 
 
