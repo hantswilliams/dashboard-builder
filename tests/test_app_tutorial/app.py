@@ -41,27 +41,53 @@ def index():
 
     manager = ComponentManager(request)
 
-    # Creating our form group
-    form_group_one = FormGroup(
-        action_url='/',
-        markdown_top="""### Select a Specific Condition""", 
-        markdown_bottom="""*Use this section to filter by a specific condition.*""") 
+    # # Creating our form group
+    # form_group_one = FormGroup(
+    #     action_url='/',
+    #     markdown_top="""### Select a Specific Condition""", 
+    #     markdown_bottom="""*Use this section to filter by a specific condition.*""") 
     
-    # Creating our first input component, and then regstering it othe form group 
-    input_dropdown = InputDropdown(
-        name='condition_selection', 
-        label='Select a condition:', 
-        values=(df, 'condition')) 
-    
-    form_group_one.add_inputs(input_dropdown)
+    # # Creating our first input component, and then regstering it othe form group 
+    # input_dropdown = InputDropdown(
+    #     name='condition_selection', 
+    #     label='Select a condition:', 
+    #     values=(df, 'condition')) 
 
-    ########################################################################
-    # Registering our input and form group to the manager 
-    manager.register_inputs(input_dropdown)
-    manager.register_form_groups(form_group_one)
+    # form_group_one.add_inputs(input_dropdown)
+    
+    # ########################################################################
+    # # Registering our input and form group to the manager 
+    # manager.register_inputs(input_dropdown)
+    # manager.register_form_groups(form_group_one)
+
+    # # User selected value
+    # user_selected = input_dropdown.value
+
+
+    # Use the new create_form_group method
+    form_group_one = ComponentManager.create_form_group(
+        manager_instance=manager,
+        action_url='/',
+        markdown_top="""### Form Group 1""", 
+        markdown_bottom="""*Use this section to filter by a specific condition.*""",
+        inputs=[
+            {
+                'type': 'dropdown',
+                'name': 'condition_selection',
+                'label': 'Select a condition:',
+                'values': (df, 'condition')
+            },
+            {
+                'type': 'dropdown',
+                'name': 'condition_selection_2',
+                'label': 'Select a condition:',
+                'values': (df, 'condition')
+            }
+        ]
+    )
 
     # User selected value
-    user_selected = input_dropdown.value
+    user_selected = form_group_one.get_input('condition_selection').value  
 
     ########################################################################
     # Create filter DF based on user value
