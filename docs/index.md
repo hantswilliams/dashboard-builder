@@ -56,6 +56,7 @@ from dashboard_builder import ComponentManager, DashboardOutput
 
 For more detailed guides, usage examples, and API reference, navigate to the respective sections in the documentation.
 
+ 
 ---
 
 ## Next Steps

@@ -180,16 +180,16 @@ class OutputChart_Altair:
     Represents a chart output component for a dashboard or view using Altair.
     This class facilitates rendering Altair charts in an HTML view.
     """
-    def __init__(self, altair_chart, chart_title, chart_id):
+    def __init__(self, content, chart_title, chart_id):
         """
         Initialize a new instance of the OutputChart_Altair class.
 
         Args:
-            altair_chart: An Altair chart object.
+            content: An Altair chart object.
             chart_title (str): The title for the Altair chart.
             chart_id (str): A unique identifier for the chart.
         """
-        self.altair_chart = altair_chart
+        self.content = content
         self.chart_title = chart_title
         self.chart_id = chart_id
 
@@ -205,7 +205,7 @@ class OutputChart_Altair:
         Returns:
             str: HTML representation of the embedded Altair chart.
         """
-        chart_json = json.dumps(self.altair_chart.to_dict())
+        chart_json = json.dumps(self.content.to_dict())
         
         return render_template_string(
             get_jinja_subtemplate("outputs/outputchart_altair.j2"),

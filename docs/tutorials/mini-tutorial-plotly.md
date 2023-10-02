@@ -107,7 +107,11 @@ With the input data procured, you'll now configure the Plotly visualization. Thi
 
     # Depending on the user's choice, designate rows as 'Selected' or 'Not Selected'.
     selected_condition = df['condition'] == user_selected_1 if user_selected_1 != 'Select All' else None 
-    colors = ['Selected' if cond else 'Not Selected' for cond in selected_condition] or ['Not Selected'] * len(df) 
+
+    if selected_condition is not None:
+        colors = ['Selected' if cond else 'Not Selected' for cond in selected_condition]
+    else:
+        colors = ['Not Selected'] * len(df)
 
     # Construct a Plotly bar chart visualization.
     fig = px.bar(
@@ -128,7 +132,7 @@ In this final segment, you'll assemble and render the Output Group. This group w
     ComponentManager.create_output_group(
         manager_instance=index_manager,
         outputs=[
-            ComponentManager.Outputs.text(f"Value selected: {user_selected_1}")
+            ComponentManager.Outputs.text(f"Value selected: {user_selected_1}"),
             ComponentManager.Outputs.plotly(fig)
         ]
     )
@@ -172,7 +176,11 @@ def index():
     user_selected_1 = input_group.get_input('condition_selection').value
 
     selected_condition = df['condition'] == user_selected_1 if user_selected_1 != 'Select All' else None # noqa
-    colors = ['Selected' if cond else 'Not Selected' for cond in selected_condition] or ['Not Selected'] * len(df) # noqa
+
+    if selected_condition is not None:
+        colors = ['Selected' if cond else 'Not Selected' for cond in selected_condition]
+    else:
+        colors = ['Not Selected'] * len(df)
 
     fig = px.bar(
         df,
@@ -185,7 +193,7 @@ def index():
     ComponentManager.create_output_group(
         manager_instance=index_manager,
         outputs=[
-            ComponentManager.Outputs.text(f"Value selected: {user_selected_1}")
+            ComponentManager.Outputs.text(f"Value selected: {user_selected_1}"),
             ComponentManager.Outputs.plotly(fig)
         ]
     )

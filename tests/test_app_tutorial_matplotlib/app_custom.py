@@ -12,7 +12,6 @@ from dashboard_builder import ComponentManager, DashboardOutput # noqa
 
 app = Flask(__name__)
 
-
 ########################################################################
 
 @app.route('/', methods=['GET', 'POST'])
@@ -28,12 +27,10 @@ def index():
     input_group = ComponentManager.create_input_group(
         manager_instance=manager,
         inputs=[
-            {
-                'type': 'dropdown',
-                'name': 'condition_selection',
-                'label': 'Select a condition:',
-                'values': (df, 'condition')
-            }
+            ComponentManager.Inputs.dropdown(
+                name = 'condition_selection', 
+                label = 'Select a condition: ', 
+                values = (df, 'condition'))
         ]
     )
 
@@ -46,14 +43,8 @@ def index():
     ComponentManager.create_output_group(
         manager_instance=manager,
         outputs=[
-            {
-                'type': 'text',
-                'content': f"Selected conditions From Form 1: {user_selected_1}" 
-            },
-            {
-                'type': 'chart_matplotlib',
-                'content': fig
-            }
+            ComponentManager.Outputs.text(f"Selected conditions From Form 1: {user_selected_1}" ), # noqa
+            ComponentManager.Outputs.matplotlib(fig)
         ]
     )
 

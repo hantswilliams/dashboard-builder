@@ -26,19 +26,18 @@ def index():
     input_group = ComponentManager.create_input_group(
         manager_instance=index_manager,
         inputs=[
-            {
-                'type': 'dropdown',
-                'name': 'condition_selection',
-                'label': 'Select a condition:',
-                'values': (df, 'condition')
-            }
+            ComponentManager.Inputs.dropdown('condition_selection', 'Select a condition: ', (df, 'condition')) # noqa 
         ]
     )
 
     user_selected_1 = input_group.get_input('condition_selection').value
 
     selected_condition = df['condition'] == user_selected_1 if user_selected_1 != 'Select All' else None # noqa
-    colors = ['Selected' if cond else 'Not Selected' for cond in selected_condition] or ['Not Selected'] * len(df) # noqa
+
+    if selected_condition is not None:
+        colors = ['Selected' if cond else 'Not Selected' for cond in selected_condition]
+    else:
+        colors = ['Not Selected'] * len(df)
 
     fig = px.bar(
         df,
@@ -51,14 +50,8 @@ def index():
     ComponentManager.create_output_group(
         manager_instance=index_manager,
         outputs=[
-            {
-                'type': 'text',
-                'content': f"Selected conditions From Form 1: {user_selected_1}"
-            },
-            {
-                'type': 'chart_plotly',
-                'content': fig
-            }
+            ComponentManager.Outputs.text(f"Value selected: {user_selected_1}"),
+            ComponentManager.Outputs.plotly(fig)
         ]
     )
 

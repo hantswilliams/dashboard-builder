@@ -4,7 +4,7 @@
 from flask import render_template_string
 from markdown import markdown
 
-# Local imports
+# Local imports for inputs 
 from .components.inputs import (
     InputDropdown,
     InputSlider_Numerical,
@@ -13,6 +13,7 @@ from .components.inputs import (
     TextInput
 )
 
+# Local imports for outputs
 from .components.outputs import (
     OutputText,
     OutputChart_Matplotlib,
@@ -21,6 +22,12 @@ from .components.outputs import (
     OutputImage,
     OutputMarkdown,
     OutputChart_Plotly,
+)
+
+# local imports of layouts
+from .components.layouts import (
+    ColumnLayout,
+    ExpanderLayout
 )
 
 from .utils import get_jinja_subtemplate
@@ -87,31 +94,111 @@ class ComponentManager:
     """
 
     _registry = {}  # to keep track of available input types
-
-
     class Inputs:
-
         @staticmethod
         def dropdown(name, label, values, action_url="/", selected_value="Select All"):
+            """
+            Creates and returns an instance of the InputDropdown component. 
+
+            Args:
+                name (str): Name of the dropdown component. This should be a unique
+                        string name for this component within the form group. 
+                label (str): Display label for the dropdown. 
+                values (tuple or list): Either a list of dropdown values or a 
+                                        tuple containing a DataFrame and column name.
+                action_url (str, optional): URL to which the form submits. 
+                                            Defaults to "/".
+                selected_value (str, optional): Initially selected value in the 
+                                                dropdown. Defaults to "Select All".
+            
+            Returns:
+                InputDropdown: An instance of the InputDropdown component.
+
+            Example with Tuple:
+            >>> In the below example, we are giving the dropdown a unique identifier 
+            of condition_selection, with a label of `Select a condition`, and the 
+            values from the dataframe `df`and the column `condition`. 
+                
+                ComponentManager.Inputs.dropdown(
+                    name = 'condition_selection', 
+                    label = 'Select a condition: ', 
+                    values = (df, 'condition'))
+
+            """
             return InputDropdown(name, label, values, action_url, selected_value)
 
         @staticmethod
         def text(name, label, default_value=""):
+            """
+            Creates and returns an instance of the TextInput component.
+
+            Args:
+                name (str): Name of the text input component.
+                label (str): Display label for the text input.
+                default_value (str, optional): Default value for the text input. Defaults 
+                                            to an empty string.
+
+            Returns:
+                TextInput: An instance of the TextInput component.
+            """
             return TextInput(name, label, default_value)
 
         @staticmethod
         def radio(name, label, options, default_value=None):
-            return InputRadio(name, label, options, default_value)
+            """
+            Creates and returns an instance of the InputRadio component.
 
+            Args:
+                name (str): Name of the radio button input component.
+                label (str): Display label for the radio button input.
+                options (list): List of options for the radio button.
+                default_value (str, optional): Default option for the radio button. 
+                                If not provided, the first option will be chosen.
+
+            Returns:
+                InputRadio: An instance of the InputRadio component.
+            """
+            return InputRadio(name, label, options, default_value)
+       
         @staticmethod
-        def slider_numerical(name, label, min_value=0, max_value=100, step=1, default_value=50): # noqa 
-            return InputSlider_Numerical(name, label, min_value, max_value, step, default_value) # noqa 
+        def slider_numerical(name, label, min_value=0, max_value=100, step=1, default_value=50): # noqa
+            """
+            Creates and returns an instance of the InputSlider_Numerical component.
+
+            Args:
+                name (str): Name of the slider input component.
+                label (str): Display label for the slider input.
+                min_value (int, optional): Minimum value for the slider. Defaults to 0.
+                max_value (int, optional): Maximum value for the slider. Defaults 
+                                            to 100.
+                step (int, optional): Step increment for the slider. Defaults to 1.
+                default_value (int, optional): Default value for the slider. 
+                                                Defaults to 50.
+
+            Returns:
+                InputSlider_Numerical: An instance of the InputSlider_Numerical 
+                    component.
+            """
+            return InputSlider_Numerical(name, label, min_value, max_value, step, default_value) #noqa
 
         @staticmethod
         def slider_categorical(name, label, categories, default_value=None):
+            """
+            Creates and returns an instance of the InputSlider_Categorical component.
+
+            Args:
+                name (str): Name of the slider input component.
+                label (str): Display label for the slider input.
+                categories (list): List of categories for the slider.
+                default_value (str, optional): Default category for the slider. 
+                                            If not provided, the first category will 
+                                            be chosen.
+
+            Returns:
+                InputSlider_Categorical: An instance of the InputSlider_Categorical 
+                                        component.
+            """
             return InputSlider_Categorical(name, label, categories, default_value)
-
-
     class Outputs:
         @staticmethod
         def text(content):
@@ -142,11 +229,16 @@ class ComponentManager:
             return OutputChart_Plotly(content)
         
         @staticmethod
-        def altair(content):
+        def altair(content, chart_title, chart_id):
             """
-            For displaying an altair object. 
+            Adds a new instance of the OutputChart_Altair class to the group.
+
+            Args:
+                content: An Altair chart object.
+                chart_title (str): The title for the Altair chart.
+                chart_id (str): A unique identifier for the chart.
             """
-            return OutputChart_Altair(content)
+            return OutputChart_Altair(content, chart_title, chart_id)
         
         @staticmethod
         def markdown(content):
@@ -154,7 +246,34 @@ class ComponentManager:
             For displaying markdown. 
             """
             return OutputMarkdown(content)
+    class Layouts:
+        @staticmethod
+        def expander(label, id, components):
+            """
+            Creates and returns an instance of the ExpanderLayout.
+
+            Args:
+                label (str): Display label for the expander.
+                id (str): A unique identifier for the expander.
+                components (list): List of components to be added inside the expander.
+                
+            Returns:
+                ExpanderLayout: An instance of the ExpanderLayout.
+            """
+            return ExpanderLayout(label, id, components)
         
+        @staticmethod
+        def column(num_columns):
+            """
+            Creates and returns an instance of the ColumnLayout.
+            
+            Args:
+                num_columns (int): Number of columns to be created in the layout.
+                
+            Returns:
+                ColumnLayout: An instance of the ColumnLayout.
+            """
+            return ColumnLayout(num_columns)
 
     # Class methods 
     @classmethod
@@ -219,7 +338,6 @@ class ComponentManager:
         
         return form_group
 
-
     @staticmethod
     def create_output_group(manager_instance, outputs):
         """
@@ -238,7 +356,6 @@ class ComponentManager:
             output_group.register(output_component)
         return output_group
 
-    
     # Initialization
     def __init__(self, request):
         """
@@ -257,6 +374,7 @@ class ComponentManager:
         self.outputs = []
         self.layouts = []
         self._template_defaults = {
+            "page_title": "Dashboard Builder",
             "footer_text": "Powered by Dashboard Builder"
         }
 
@@ -407,5 +525,8 @@ ComponentManager.register_component('chart_altair', OutputChart_Altair)
 ComponentManager.register_component('table_html', OutputTable_HTML)
 ComponentManager.register_component('image', OutputImage)
 ComponentManager.register_component('markdown', OutputMarkdown)
+
+
+
 
 
