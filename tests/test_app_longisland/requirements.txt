@@ -1,0 +1,7 @@
+requests 
+flask 
+pandas 
+markdown 
+matplotlib
+plotly
+dashboard-builder
