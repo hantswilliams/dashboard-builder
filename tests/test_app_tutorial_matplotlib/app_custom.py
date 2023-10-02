@@ -20,7 +20,8 @@ def index():
     manager = ComponentManager(request)
 
     manager.template_defaults(
-        footer_text="My Custom Footer - Hants Williams - Condition Frequency Count Dashboard - Powered by Dashboard Builder" # noqa
+        page_title="CMS 2019 Data",
+        footer_text="Built by Hants Williams - Condition Frequency Count Dashboard - Powered by Dashboard Builder" # noqa
     )
 
     # Use the new create_input_group method
