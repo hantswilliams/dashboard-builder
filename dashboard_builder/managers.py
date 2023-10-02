@@ -498,7 +498,14 @@ class ComponentManager:
 
     def template_defaults(self, **kwargs):
         """
-        Update the manager's configuration with provided keyword arguments.
+        Defaults for the `componentmanager`
+        There are default parameters that are automatically set, but you can 
+        update the manager's configuration with provided arguments.
+
+        Args:
+            page_title (str, optional): Defaults to "Dashboard Builder"
+            footer_text (str, optional): Defaults to "Powered by Dashboard Builder"
+
         """
         self._template_defaults.update(kwargs)
 

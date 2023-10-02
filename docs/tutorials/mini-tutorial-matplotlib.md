@@ -56,6 +56,8 @@ For this tutorial, we are going to create and use a `create_plot` function that 
 !!! note "Matploblib writing in web servers!!"
     When using matplotlib in a server environment we need to set a specific argument after loading in matplotlib: `matplotlib.use('Agg')`. This step is required for rendering any matplotlib visualizations in a flask-based web application. The `Agg` argument is used for file writing in our Flask app. For more information, please visit the matplotlib [documentation on backends](https://matplotlib.org/stable/users/explain/figure/backends.html) to see all that is possible. 
 
+In the below section of code we have *used vanilla python to create a matplot plot. There is nothing unique to the dashboard_builder library that we have done below. Following best practices, we have just segmented this part of the code out of own main `app.py` file.
+
 ``` py title="example_matplot.py"
 
 import matplotlib

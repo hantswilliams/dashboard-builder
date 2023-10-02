@@ -23,14 +23,16 @@ markdown_extensions:
 
 nav:
   - Welcome: index.md
-  - Tutorials: 
-    - Starter with Plotly: tutorials/mini-tutorial-plotly.md
-    - Starter with Matplotlib: tutorials/mini-tutorial-matplotlib.md
+  - Quick Start: 
+    - with Plotly: tutorials/mini-tutorial-plotly.md
+    - with Matplotlib: tutorials/mini-tutorial-matplotlib.md
   - Technical Overview: 
     - Component Manager and Dashboard Output: manager/manager_dashboard.md
+    - Dashboard Defaults: manager/defaults.md
     - Example flow: manager/example_flow.md
     - Components: 
         - Inputs: components/inputs.md
+        - Outputs: components/outputs.md
     # - Outputs: 
     #     - Classes: classes/component_output.md
     #     - Templates: jinja/output.md

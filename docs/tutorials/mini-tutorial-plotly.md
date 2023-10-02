@@ -99,7 +99,7 @@ def index():
 
 ##### 3.2. Crafting the Plotly Visualization
 
-With the input data procured, you'll now configure the Plotly visualization. This segment deciphers the user's selection, determines coloring conditions, and structures the chart.
+With the input data procured, you'll now configure the Plotly visualization. This segment deciphers the user's selection, determines coloring conditions, and structures the chart. This part below is *vanilla python - you are creating a plotly chart just like you normally would.*
 
 ```python
     # Extract the user's choice from the input group.
@@ -164,8 +164,10 @@ df = pd.DataFrame({
 @app.route('/', methods=['GET', 'POST'])
 def index():
 
+    # create a new componentmanager object called index_manager for the / endpoint 
     index_manager = ComponentManager(request)
 
+    # create a intput group with a dropdown 
     input_group = ComponentManager.create_input_group(
         manager_instance=index_manager,
         inputs=[
@@ -173,15 +175,17 @@ def index():
         ]
     )
 
+    # get the user value of the dropdown from the input_group
     user_selected_1 = input_group.get_input('condition_selection').value
 
+    # creating a variable to map plotly colors on
     selected_condition = df['condition'] == user_selected_1 if user_selected_1 != 'Select All' else None # noqa
-
     if selected_condition is not None:
         colors = ['Selected' if cond else 'Not Selected' for cond in selected_condition]
     else:
         colors = ['Not Selected'] * len(df)
 
+    # the plotly bar chart
     fig = px.bar(
         df,
         x='condition',
@@ -190,6 +194,7 @@ def index():
         color_discrete_map={"Not Selected": "#A0AEC0", "Selected": "#48BB78"}  
     )
 
+    # creating a output group to render the select value, and the plotly object
     ComponentManager.create_output_group(
         manager_instance=index_manager,
         outputs=[
@@ -198,6 +203,7 @@ def index():
         ]
     )
 
+    # render the dashboardouput with defaults
     return DashboardOutput(manager=index_manager).render()
 
 if __name__ == "__main__":
