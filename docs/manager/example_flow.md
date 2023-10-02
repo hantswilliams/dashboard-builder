@@ -12,37 +12,27 @@ Utilize the `create_input_group` class method from `ComponentManager` to create 
         ...
     )
 ```
-### 3. **Component Registration** 
-Register input components with the manager. This means linking specific string identifiers (like 'dropdown' or 'text') with their corresponding Python classes (`InputDropdown`, `TextInput`, etc.). Similarly, register output components (like 'text' for `OutputText` or 'chart_matplotlib' for `OutputChart_Matplotlib`).
+### 3. **Component Registration and Input Group Creation** 
+To simplify and streamline the process, we use predefined factory methods for each input component. This not only aids in creating component instances but also reduces the need for separate component registration steps. Use the factory methods inside the `ComponentManager.Inputs` class to directly add your input components. Example of adding in a dropdown component for taking in user input: 
 ```python
-    input_group = ComponentManager.create_input_group(
-        ...
-        inputs=[
-            {
-                'type': 'dropdown',
-                'name': 'condition_selection',
-                'label': 'Select a condition:',
-                'values': (df, 'condition')
-            }
-        ]
-    )
+input_group = ComponentManager.create_input_group(
+    manager_instance=manager,
+    inputs=[
+        ComponentManager.Inputs.dropdown('condition_selection', 'Select a condition:', (df, 'condition'))
+    ]
+)
 ```
+
 ### 4. **Output Group Creation**
-Utilize the `create_output_group` class method from `ComponentManager` to create an output group which can contain multiple output components. Each output component should be registered within the created output group.
+To create an output group containing multiple output components, utilize the `create_output_group` class method from `ComponentManager`. With the new architecture, you can leverage factory methods for output components available under `ComponentManager.Outputs`. Here is an example then of creating two output components, one for text and one for a matplotlib figure: 
 ```python
-    ComponentManager.create_output_group(
-        manager_instance=manager,
-        outputs=[
-            {
-                'type': 'text',
-                'content': f"Selected conditions From Form 1: {user_selected_1}" 
-            },
-            {
-                'type': 'chart_matplotlib',
-                'content': fig
-            }
-        ]
-    )
+ComponentManager.create_output_group(
+    manager_instance=manager,
+    outputs=[
+        ComponentManager.Outputs.text_output(f"Selected conditions From Form 1: {user_selected_1}"),
+        ComponentManager.Outputs.chart_matplotlib(fig)
+    ]
+)
 ```
 ### 5. **Template Management and Final Rendering**
 Decide whether to use a custom template or a default one: If custom: Make sure both `template_name` and `template_path` are provided. Fetch the custom template content using `TemplateManager.dashboard_template_custom`. If default: Fetch the default template content using `TemplateManager.dashboard_template`. Create an instance of `DashboardOutput` with the `ComponentManager` instance, template details, and any other custom parameters.  For example, rendering the dashboard using the manager instance can be done with:

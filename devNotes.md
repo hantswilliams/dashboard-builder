@@ -1,5 +1,15 @@
 # Local Dev Notes
 
+## Updating 
+To publish a new version, and also update the existing documentation can use the following:
+```bash
+./build.bash
+```
+This will do a couple things:
+- update the version number for the build in the `pyproject.toml` and the version number in the associated mkdocs documentation inside the `docs/index.md` 
+- add, commit, and publish these changes to github
+- vercel is setup to automatically re-deploy with git push, so the official documentation will then also be updated
+
 ## Ruff 
 For running linting tests, can run ruff locally in the root directory of the folder: 
 ```bash

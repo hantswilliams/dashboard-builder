@@ -24,8 +24,8 @@ markdown_extensions:
 nav:
   - Welcome: index.md
   - Tutorials: 
-    - Starter with Plotly: tutorials/mini-tutorial-plotly.md
     - Starter with Matplotlib: tutorials/mini-tutorial-matplotlib.md
+    - Starter with Plotly: tutorials/mini-tutorial-plotly.md
   - Technical Overview: 
     - Component Manager and Dashboard Output: manager/manager_dashboard.md
     - Example flow: manager/example_flow.md

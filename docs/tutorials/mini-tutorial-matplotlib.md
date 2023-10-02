@@ -136,12 +136,7 @@ def index():
     input_group = ComponentManager.create_input_group(
         manager_instance=index_manager,
         inputs=[
-            {
-                'type': 'dropdown',
-                'name': 'condition_selection',
-                'label': 'Select a condition:',
-                'values': (df, 'condition')
-            }
+            ComponentManager.Inputs.dropdown('condition_selection', 'Select a condition: ', (df, 'condition'))
         ]
     )
 
@@ -150,10 +145,7 @@ def index():
     ComponentManager.create_output_group(
         manager_instance=index_manager,
         outputs=[
-            {
-                'type': 'chart_matplotlib',
-                'content': fig
-            }
+            ComponentManager.Outputs.matplotlib(fig)
         ]
     )
 
@@ -181,12 +173,7 @@ def index():
     input_group = ComponentManager.create_input_group(
         manager_instance=index_manager,
         inputs=[
-            {
-                'type': 'dropdown',
-                'name': 'condition_selection',
-                'label': 'Select a condition:',
-                'values': (df, 'condition')
-            }
+            ComponentManager.Inputs.dropdown('condition_selection', 'Select a condition: ', (df, 'condition'))
         ]
     )
 
@@ -195,10 +182,7 @@ def index():
     ComponentManager.create_output_group(
         manager_instance=index_manager,
         outputs=[
-            {
-                'type': 'chart_matplotlib',
-                'content': fig
-            }
+            ComponentManager.Outputs.matplotlib(fig)
         ]
     )
 

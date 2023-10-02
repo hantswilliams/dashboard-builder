@@ -92,12 +92,7 @@ def index():
     input_group = ComponentManager.create_input_group(
         manager_instance=index_manager,
         inputs=[
-            {
-                'type': 'dropdown',
-                'name': 'condition_selection',
-                'label': 'Select a condition:',
-                'values': (df, 'condition')
-            }
+            ComponentManager.Inputs.dropdown('condition_selection', 'Select a condition: ', (df, 'condition'))
         ]
     )
 ```
@@ -133,14 +128,8 @@ In this final segment, you'll assemble and render the Output Group. This group w
     ComponentManager.create_output_group(
         manager_instance=index_manager,
         outputs=[
-            {
-                'type': 'text',
-                'content': f"Selected conditions From Form 1: {user_selected_1}"
-            },
-            {
-                'type': 'chart_plotly',
-                'content': fig
-            }
+            ComponentManager.Outputs.text(f"Value selected: {user_selected_1}")
+            ComponentManager.Outputs.plotly(fig)
         ]
     )
 
@@ -176,12 +165,7 @@ def index():
     input_group = ComponentManager.create_input_group(
         manager_instance=index_manager,
         inputs=[
-            {
-                'type': 'dropdown',
-                'name': 'condition_selection',
-                'label': 'Select a condition:',
-                'values': (df, 'condition')
-            }
+            ComponentManager.Inputs.dropdown('condition_selection', 'Select a condition: ', (df, 'condition'))
         ]
     )
 
@@ -201,14 +185,8 @@ def index():
     ComponentManager.create_output_group(
         manager_instance=index_manager,
         outputs=[
-            {
-                'type': 'text',
-                'content': f"Selected conditions From Form 1: {user_selected_1}"
-            },
-            {
-                'type': 'chart_plotly',
-                'content': fig
-            }
+            ComponentManager.Outputs.text(f"Value selected: {user_selected_1}")
+            ComponentManager.Outputs.plotly(fig)
         ]
     )
 
