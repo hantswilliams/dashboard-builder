@@ -1,5 +1,11 @@
 # Local Dev Notes
 
+## Ruff 
+For running linting tests, can run ruff locally in the root directory of the folder: 
+```bash
+ruff check .
+```
+
 ## Pytest 
 
 Pytest is installed as a local dev. Current test are found within `/tests`. Need to continue building out, but for now there are a few. 

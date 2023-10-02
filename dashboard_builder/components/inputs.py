@@ -50,14 +50,20 @@ class InputDropdown(BaseInput):
             ValueError: If the provided values are neither a list nor a tuple of 
             DataFrame and column name.
 
-        >>> Example:
+        >>> Example of using a dropdown input component within the create_input_group 
+        method:
 
-            from dashboard_builder.components.inputs import InputDropdown
-            
-            input_dropdown = InputDropdown(
-                name='unique_name', 
-                label='Select a X:', 
-                values=(df, 'name_of_column')) 
+            input_group = ComponentManager.create_input_group(
+                manager_instance=index_manager,
+                inputs=[
+                    {
+                        'type': 'dropdown',
+                        'name': 'condition_selection',
+                        'label': 'Select a condition:',
+                        'values': (df, 'condition')
+                    }
+                ]
+            )
 
         """
         super().__init__(name, selected_value)

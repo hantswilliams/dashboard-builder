@@ -6,6 +6,7 @@ import base64
 import json
 from markdown import markdown
 from ..utils import get_jinja_subtemplate
+import plotly.io as pio
 
 class OutputText:
     """
@@ -37,15 +38,15 @@ class OutputChart_Matplotlib:
     Represents a chart output component for a dashboard or view.
     This class facilitates rendering Matplotlib plots in an HTML view.
     """
-    def __init__(self, matplob_object):
+    def __init__(self, content):
         """
         Initialize a new instance of the OutputChart_Matplotlib class.
 
         Args:
-            matplob_object: A Matplotlib figure or similar object that has 
+            content: A Matplotlib figure or similar object that has 
                 a 'savefig' method.
         """
-        self.matplob_object = matplob_object
+        self.content = content
 
     def render(self):
         """
@@ -65,7 +66,7 @@ class OutputChart_Matplotlib:
         buf = io.BytesIO()
 
         # Convert the plt object to a Figure, then save the figure to the buffer
-        self.matplob_object.savefig(buf, format="png", bbox_inches='tight')
+        self.content.savefig(buf, format="png", bbox_inches='tight')
         buf.seek(0)
 
         # Convert bytes to a data URL (base64 encoding)
@@ -77,6 +78,101 @@ class OutputChart_Matplotlib:
         return render_template_string(
             get_jinja_subtemplate("outputs/outputchart_matplotlib.j2"),
             image=data_url)
+
+
+class OutputChart_Plotly:
+    """
+    Represents a chart output component for a dashboard or view using Plotly.
+    This class facilitates rendering Plotly charts in an HTML view.
+    """
+    def __init__(self, content):
+        """
+        Initialize a new instance of the OutputChart_Plotly class.
+
+        Args:
+            content: A Plotly chart object.
+        """
+        self.content = content
+
+    def render(self):
+        """
+        Render the Plotly chart as an embedded HTML using the specified template.
+
+        The method performs the following steps:
+        1. Converts the Plotly chart to an HTML string.
+        2. Renders the HTML string using a specified template.
+
+        Returns:
+            str: HTML representation of the embedded Plotly chart.
+        """
+        chart_html = pio.to_html(self.content, full_html=False)
+        
+        return render_template_string(
+            get_jinja_subtemplate("outputs/outputchart_plotly.j2"),
+            chart_html=chart_html)
+
+
+class OutputTable_HTML:
+    """
+    Represents a table output component for a dashboard or view using HTML.
+    This class facilitates rendering tabular data in an HTML view.
+    """
+    def __init__(self, content):
+        """
+        Initialize a new instance of the OutputTable_HTML class.
+
+        Args:
+            data (list): A list of dictionaries representing the rows of the table. 
+                         Each dictionary should have the same keys representing 
+                         the columns.
+        """
+        self.content = content  # Assuming data is a list of dictionaries
+
+    def render(self):
+        """
+        Render the tabular data as an HTML table using the specified template.
+
+        Returns:
+            str: HTML representation of the data in table format.
+        """
+
+        # transform to dictionary
+
+        dataframe = self.content.to_dict(orient='records')
+
+        return render_template_string(
+            get_jinja_subtemplate("outputs/outputtable_html.j2"),
+            data=dataframe)
+
+class OutputMarkdown:
+    """
+    Represents a markdown output component for a dashboard or view.
+    This class facilitates rendering markdown content in an HTML view.
+    """
+    def __init__(self, content):
+        """
+        Initialize a new instance of the OutputMarkdown class.
+
+        Args:
+            content (str): The markdown content to be rendered.
+        """
+        self.content = content
+
+    def render(self):
+        """
+        Convert the markdown content to HTML and then render it 
+        using the specified template.
+
+        Returns:
+            str: HTML representation of the markdown content.
+        """
+        html_content = markdown(self.content)    
+        return render_template_string(
+            get_jinja_subtemplate("outputs/outputmarkdown.j2"),
+            content=html_content)
+
+
+
 
 
 class OutputChart_Altair:
@@ -117,32 +213,7 @@ class OutputChart_Altair:
             chart_id=self.chart_id)
 
 
-class OutputTable_HTML:
-    """
-    Represents a table output component for a dashboard or view using HTML.
-    This class facilitates rendering tabular data in an HTML view.
-    """
-    def __init__(self, data):
-        """
-        Initialize a new instance of the OutputTable_HTML class.
 
-        Args:
-            data (list): A list of dictionaries representing the rows of the table. 
-                         Each dictionary should have the same keys representing 
-                         the columns.
-        """
-        self.data = data  # Assuming data is a list of dictionaries
-
-    def render(self):
-        """
-        Render the tabular data as an HTML table using the specified template.
-
-        Returns:
-            str: HTML representation of the data in table format.
-        """
-        return render_template_string(
-            get_jinja_subtemplate("outputs/outputtable_html.j2"),
-            data=self.data)
 
 
 class OutputImage:
@@ -175,29 +246,6 @@ class OutputImage:
             src=self.src, alt=self.alt)
 
 
-class OutputMarkdown:
-    """
-    Represents a markdown output component for a dashboard or view.
-    This class facilitates rendering markdown content in an HTML view.
-    """
-    def __init__(self, markdown_content):
-        """
-        Initialize a new instance of the OutputMarkdown class.
 
-        Args:
-            markdown_content (str): The markdown content to be rendered.
-        """
-        self.markdown_content = markdown_content
+    
 
-    def render(self):
-        """
-        Convert the markdown content to HTML and then render it 
-        using the specified template.
-
-        Returns:
-            str: HTML representation of the markdown content.
-        """
-        html_content = markdown(self.markdown_content)    
-        return render_template_string(
-            get_jinja_subtemplate("outputs/outputmarkdown.j2"),
-            content=html_content)

@@ -1,6 +1,6 @@
 from flask import Flask, request
-from matplot import create_plot
-from data import df
+from example_matplot import create_plot
+from example_data import df
 
 ##########################################################################
 #### For local dev testing....//otherwise turn off - comment out below ###

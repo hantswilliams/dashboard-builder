@@ -11,7 +11,7 @@ from dashboard_builder import get_dashboard_template # noqa: E402
 from dashboard_builder.config import Config # noqa: E402
 from dashboard_builder.components.inputs import InputDropdown  # noqa: E402
 from dashboard_builder.components.outputs import OutputText, OutputTable_HTML, OutputImage, OutputMarkdown # noqa: E501, E402
-from dashboard_builder.components.managers import ComponentManager, FormGroup # noqa: E501, E402
+from dashboard_builder.managers import ComponentManager, FormGroup # noqa: E501, E402
 
 app = Flask(__name__)
 

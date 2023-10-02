@@ -1,4 +1,4 @@
-import pandas as pd
+import pandas as pd # noqa
 import matplotlib
 matplotlib.use('Agg') # required for Flask to serve matplotlib images
 import matplotlib.pyplot as plt # noqa

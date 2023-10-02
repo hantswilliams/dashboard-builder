@@ -13,7 +13,7 @@ from dashboard_builder import get_dashboard_template  # noqa: E402
 from dashboard_builder.config import Config # noqa: E402
 from dashboard_builder.components.inputs import InputDropdown, InputSlider_Categorical, InputRadio # noqa: E402, E501
 from dashboard_builder.components.outputs import OutputText, OutputChart_Matplotlib, OutputChart_Altair, OutputTable_HTML, OutputImage, OutputMarkdown # noqa: E501, E402
-from dashboard_builder.components.managers import ComponentManager, FormGroup # noqa: E402, E501
+from dashboard_builder.managers import ComponentManager, FormGroup # noqa: E402, E501
 from dashboard_builder.components.layouts import ColumnLayout, ExpanderLayout # noqa: E402, E501
 
 app = Flask(__name__)

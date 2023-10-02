@@ -1,6 +1,6 @@
 from flask import Flask, request
-from matplot import create_plot
-from data import df
+from example_matplot import create_plot
+from example_data import df
 
 #### For local dev testing....//otherwise turn off - comment out below ###
 import os # noqa
@@ -20,9 +20,9 @@ def index():
 
     manager = ComponentManager(request)
 
-    # manager.config(
-    #     footer_text="Condition Frequency Count Dashboard - Powered by Dashboard Builder"
-    # )
+    manager.template_defaults(
+        footer_text="My Custom Footer - Hants Williams - Condition Frequency Count Dashboard - Powered by Dashboard Builder" # noqa
+    )
 
     # Use the new create_input_group method
     input_group = ComponentManager.create_input_group(
@@ -62,8 +62,8 @@ def index():
     # For custom templates
     return DashboardOutput(
         manager=manager,
-        template_name="custom_temp.j2", use_custom_template=True, template_config={"custom_template_dir": "./"}, # noqa
-        dashboard_settings=manager.config_values, 
+        template_path="./", 
+        template_name="custom_temp.j2", 
         inputs=manager.render_form_groups(), 
         outputs=manager.render_outputs(),
         custom_value_1="Yolo Man", # if you want to pass custom values to template  # noqa

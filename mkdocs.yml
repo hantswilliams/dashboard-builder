@@ -23,15 +23,17 @@ markdown_extensions:
 
 nav:
   - Welcome: index.md
-  - Getting Started: tutorials/getting-started.md
-  - API: 
-    - Configuration: classes/configuration.md
-    - Inputs: 
-        - Classes: classes/component_input.md
-        - Templates: jinja/input.md
-    - Outputs: 
-        - Classes: classes/component_output.md
-        - Templates: jinja/output.md
-    - Layouts: 
-        - Classes: classes/layouts.md
-        - Templates: jinja/layout.md
+  - Tutorials: 
+    - Starter with Plotly: tutorials/mini-tutorial-plotly.md
+    - Starter with Matplotlib: tutorials/mini-tutorial-matplotlib.md
+  - Technical Overview: 
+    - Component Manager and Dashboard Output: manager/manager_dashboard.md
+    - Example flow: manager/example_flow.md
+    # - Inputs: 
+    #     - DropDown: inputs/dropdown.md
+    # - Outputs: 
+    #     - Classes: classes/component_output.md
+    #     - Templates: jinja/output.md
+    # - Layouts: 
+    #     - Classes: classes/layouts.md
+    #     - Templates: jinja/layout.md

@@ -16,7 +16,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../.
 from dashboard_builder import get_dashboard_template, get_dashboard_template_custom  # noqa: E402, E501, F401
 from dashboard_builder.config import Config # noqa: E402
 from dashboard_builder.components.outputs import OutputChart_Matplotlib # noqa: E501, E402
-from dashboard_builder.components.managers import ComponentManager # noqa: E402, E501
+from dashboard_builder.managers import ComponentManager # noqa: E402, E501
 
 app = Flask(__name__)
 
