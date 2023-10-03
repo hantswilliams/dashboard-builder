@@ -27,7 +27,8 @@ def index():
     # Step1b: Configure anything you want configured
     index_manager.template_defaults(
         page_title="CMS 2019 Data",
-        footer_text="Built by Hants Williams - Condition Frequency Count Dashboard - Powered by Dashboard Builder" # noqa
+        footer_text="Built by Hants Williams - Condition Frequency Count Dashboard - Powered by Dashboard Builder", # noqa
+        theme='light',
     )
 
     # Create example intput group 1 
@@ -142,7 +143,7 @@ def index():
     )
 
     # Step 4: Return the user the outputted dashboard to show values
-    return DashboardOutput(manager=index_manager).render()
+    return DashboardOutput(manager=index_manager).render() # noqa
 
 if __name__ == '__main__':
     app.run(debug=True)
