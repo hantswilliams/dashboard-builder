@@ -49,12 +49,25 @@ Leveraging the power of Tailwind CSS, Dashboard Builder offers dynamic and mobil
     - Visualizations
         - Altair 
         - Matplotlib 
+        - Plotly
     - Markdown 
     - Free text 
+    - Images
+    - Text
+    - Markdown
 
 - *Container Related Elements*:
     - Column 
     - Expander 
+
+- *Style Themes*: 
+    - Default (light)
+    - Dark 
+    - Pink
+    - Blue
+    - Red
+    - Yellow
+    - Green
 
 - Default and custom templates 
     - Currently have two default templates to choose between for a dashboard page: 
@@ -64,8 +77,6 @@ Leveraging the power of Tailwind CSS, Dashboard Builder offers dynamic and mobil
         - You can create your own custom template and load it in. Generally speaking, you can make the template look however you want. 
         - The default base template that we use, that you can modify however you want is [found here](https://github.com/hantswilliams/dashboard-builder/blob/main/dashboard_builder/dashboard_templates/base.j2)
         - You can then then set the custom folder where the template exists with the `dashboard_builder.config` parameter, and then call the `get_dashboard_template_custom` function to use your own template!  
-
-
 
 
 --- 
