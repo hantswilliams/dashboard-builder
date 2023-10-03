@@ -23,6 +23,11 @@ def index():
 
     index_manager = ComponentManager(request)
 
+    index_manager.template_defaults(
+        page_title="Plotly Test Data",
+        footer_text="Built by Hants Williams - Plotly Example - Powered by Dashboard Builder", # noqa
+    )
+
     input_group = ComponentManager.create_input_group(
         manager_instance=index_manager,
         inputs=[

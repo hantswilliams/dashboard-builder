@@ -31,6 +31,8 @@ from .components.layouts import (
 )
 
 from .utils import get_jinja_subtemplate
+from .theme_utils import set_global_theme, get_global_theme
+from .themes import THEME_COLORS
 
 class OutputGroup:
     def __init__(self, manager):
@@ -94,9 +96,16 @@ class ComponentManager:
     """
 
     _registry = {}  # to keep track of available input types
+
+    CURRENT_THEME = "light"  # default theme
+
+    @classmethod
+    def set_theme(cls, theme_name):
+        cls.CURRENT_THEME = theme_name
+
     class Inputs:
         @staticmethod
-        def dropdown(name, label, values, action_url="/", selected_value="Select All"):
+        def dropdown(name, label, values, action_url="/", selected_value="Select All"): # noqa
             """
             Creates and returns an instance of the InputDropdown component. 
 
@@ -125,7 +134,7 @@ class ComponentManager:
                     values = (df, 'condition'))
 
             """
-            return InputDropdown(name, label, values, action_url, selected_value)
+            return InputDropdown(name, label, values, action_url, selected_value) # noqa
 
         @staticmethod
         def text(name, label, default_value=""):
@@ -135,8 +144,8 @@ class ComponentManager:
             Args:
                 name (str): Name of the text input component.
                 label (str): Display label for the text input.
-                default_value (str, optional): Default value for the text input. Defaults 
-                                            to an empty string.
+                default_value (str, optional): Default value for the text input. 
+                                        Defaults to an empty string.
 
             Returns:
                 TextInput: An instance of the TextInput component.
@@ -375,7 +384,7 @@ class ComponentManager:
         self.layouts = []
         self._template_defaults = {
             "page_title": "Dashboard Builder",
-            "footer_text": "Powered by Dashboard Builder"
+            "footer_text": "Powered by Dashboard Builder",
         }
 
     # Instance methods
@@ -470,7 +479,10 @@ class ComponentManager:
         Returns:
         - list: List of rendered HTML strings for each form group.
         """
+        theme_colors = THEME_COLORS[get_global_theme()]
+
         rendered_form_groups = []
+
         for form_group in self.form_groups:
             inputs = [input_component.render() for input_component in form_group.inputs]
             rendered_form_group = render_template_string(
@@ -478,7 +490,8 @@ class ComponentManager:
                 action_url=form_group.action_url, 
                 inputs=inputs,
                 markdown_top=markdown(form_group.markdown_top),
-                markdown_bottom=markdown(form_group.markdown_bottom)
+                markdown_bottom=markdown(form_group.markdown_bottom),
+                theme_colors=theme_colors
             )
             rendered_form_groups.append(rendered_form_group)
         return rendered_form_groups
@@ -507,6 +520,10 @@ class ComponentManager:
             footer_text (str, optional): Defaults to "Powered by Dashboard Builder"
 
         """
+        
+        if 'theme' in kwargs:
+            set_global_theme(kwargs["theme"])
+
         self._template_defaults.update(kwargs)
 
     @property

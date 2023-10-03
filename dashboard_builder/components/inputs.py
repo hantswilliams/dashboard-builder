@@ -2,6 +2,8 @@
 
 from flask import render_template_string
 from ..utils import get_jinja_subtemplate
+from ..themes import THEME_COLORS
+from ..theme_utils import get_global_theme
 
 class BaseInput:
     """
@@ -18,6 +20,7 @@ class BaseInput:
         """
         self.name = name
         self.default_value = default_value
+        self.theme_colors = THEME_COLORS[get_global_theme()]
 
     def capture(self, request):
         """
@@ -32,8 +35,8 @@ class InputDropdown(BaseInput):
     """
     A class representing a dropdown input component for a dashboard.
     """
-    def __init__(self, name, label, 
-                 values, action_url="/", selected_value="Select All"):
+    def __init__(self, name, label, values, action_url="/", 
+                 selected_value="Select All"): 
         """
         Initialize a new instance of InputDropdown.
 
@@ -103,8 +106,11 @@ class InputDropdown(BaseInput):
         """
         return render_template_string(
             get_jinja_subtemplate("inputs/inputdropdown.j2"), 
-            name=self.name, label=self.label, 
-            values=self.values, selected_value=self.selected_value)
+            name=self.name, 
+            label=self.label, 
+            values=self.values, 
+            selected_value=self.selected_value,
+            theme_colors=self.theme_colors)
     
 class TextInput(BaseInput):
     """
@@ -143,7 +149,8 @@ class TextInput(BaseInput):
         return render_template_string(
             get_jinja_subtemplate("inputs/textinput.j2"),
             name=self.name, label=self.label, 
-            default_value=self.default_value)
+            default_value=self.default_value,
+            theme_colors=self.theme_colors)
 
 class InputSlider_Numerical(BaseInput):
     """
@@ -191,7 +198,7 @@ class InputSlider_Numerical(BaseInput):
             get_jinja_subtemplate("inputs/inputslider_numerical.j2"),
             name=self.name, label=self.label, 
             min_value=self.min_value, max_value=self.max_value, step=self.step, 
-            default_value=self.default_value)
+            default_value=self.default_value, theme_colors=self.theme_colors)
 
 class InputSlider_Categorical(BaseInput):
     """
@@ -241,7 +248,8 @@ class InputSlider_Categorical(BaseInput):
         return render_template_string(
             get_jinja_subtemplate("inputs/inputslider_categorical.j2"),
             name=self.name, label=self.label, max_position=len(self.categories)-1, 
-            default_position=default_position, categories=self.categories)
+            default_position=default_position, categories=self.categories,
+            theme_colors=self.theme_colors)
 
 
 class InputRadio(BaseInput):
@@ -300,4 +308,4 @@ class InputRadio(BaseInput):
         return render_template_string(
             get_jinja_subtemplate("inputs/inputradio.j2"),
             name=self.name, label=self.label, options=self.options, 
-            default_value=self.default_value)
+            default_value=self.default_value, theme_colors=self.theme_colors)

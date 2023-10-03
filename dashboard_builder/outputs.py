@@ -1,9 +1,10 @@
 import os
 from flask import render_template_string
 
+from .theme_utils import get_global_theme
+from .themes import THEME_COLORS
 
 class TemplateManager:
-    
     templates = os.listdir(os.path.join(os.path.dirname(__file__), 'dashboard_templates')) # noqa
     templates_dict = {os.path.splitext(template)[0]: template for template in templates}
     
@@ -36,39 +37,52 @@ class TemplateManager:
 
 
 class DashboardOutput:
-    
     def __init__(self, manager=None, template_name=None, template_path=None, **kwargs):  # noqa
         
         if manager is None:
             raise ValueError("Manager instance is required.")
         
-        # Check for custom template parameters
-        if bool(template_path) ^ bool(template_name):  # using XOR to ensure both or neither are provided # noqa
-            raise ValueError("Both template_name and template_path must be provided for custom templates.")  # noqa
-
-        self.use_custom_template = bool(template_path) and bool(template_name)
-
-        self.use_custom_template = bool(template_path) and bool(template_name)
-        self.template_path = template_path if self.use_custom_template else None
-        self.template_name = template_name if self.use_custom_template else 'base'
+        # Check for default template names
+        default_template_names = ['base', 'base_nosidebar']
+        
+        # Ensure correct parameters are passed based on the template name
+        if template_name in default_template_names:
+            if template_path:
+                raise ValueError("template_path must not be provided for default templates.") # noqa
+            self.use_custom_template = False
+            self.template_name = template_name
+            self.template_path = None
+        elif template_name and template_path:
+            self.use_custom_template = True
+            self.template_name = template_name
+            self.template_path = template_path
+        elif template_name and not template_path:
+            raise ValueError("template_path must be provided if a custom template_name is given.") # noqa
+        else:
+            self.use_custom_template = False
+            self.template_name = 'base'
+            self.template_path = None
+        
         self.template_defaults = manager.template_defaults_values
         self.inputs = manager.render_form_groups()
         self.outputs = manager.render_outputs()
         self.custom_params = kwargs
         
     def render(self):
-        
         # Decide on which template fetching method to use based on the use_custom_template flag # noqa
         if self.use_custom_template:
             dashboard_template = TemplateManager.dashboard_template_custom(self.template_name, self.template_path) # noqa
         else:
             dashboard_template = TemplateManager.dashboard_template(self.template_name)
-        
+
+        theme_colors = THEME_COLORS[get_global_theme()]
+
         # Default context
         dashboard_context = {
             'defaults': self.template_defaults,
             'form_groups': self.inputs,
-            'output_components': self.outputs
+            'output_components': self.outputs,
+            'theme_colors': theme_colors,
         }
         
         # Merge with custom parameters

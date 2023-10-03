@@ -11,7 +11,7 @@
         class="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-blue-500"
         oninput="updateCategoryDisplay(this)"
     >
-    <output for="{{ name }}_range" id="{{ name }}_output" class="text-sm text-gray-500">
+    <output for="{{ name }}_range" id="{{ name }}_output" class="text-sm {{ theme_colors['text'] }}">
         {{ categories[default_position] }}
     </output>
     <!-- Hidden field to store the category name -->

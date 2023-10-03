@@ -26,10 +26,12 @@ nav:
   - Quick Start: 
     - with Plotly: tutorials/mini-tutorial-plotly.md
     - with Matplotlib: tutorials/mini-tutorial-matplotlib.md
+  - Tutorials:
+    - Custom Templates: tutorials/custom-templates.md
   - Technical Overview: 
     - Component Manager and Dashboard Output: manager/manager_dashboard.md
+    - Initalization: manager/example_flow.md
     - Dashboard Defaults: manager/defaults.md
-    - Example flow: manager/example_flow.md
     - Components: 
         - Inputs: components/inputs.md
         - Outputs: components/outputs.md

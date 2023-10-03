@@ -1,12 +1,14 @@
 # components/outputs.py
 
+from ..utils import get_jinja_subtemplate
+
 from flask import render_template_string
 import io
 import base64
 import json
 from markdown import markdown
-from ..utils import get_jinja_subtemplate
 import plotly.io as pio
+
 
 class OutputText:
     """
@@ -144,7 +146,7 @@ class OutputTable_HTML:
             get_jinja_subtemplate("outputs/outputtable_html.j2"),
             data=dataframe)
 
-class OutputMarkdown:
+class OutputMarkdown():
     """
     Represents a markdown output component for a dashboard or view.
     This class facilitates rendering markdown content in an HTML view.
@@ -166,10 +168,12 @@ class OutputMarkdown:
         Returns:
             str: HTML representation of the markdown content.
         """
+
         html_content = markdown(self.content)    
         return render_template_string(
             get_jinja_subtemplate("outputs/outputmarkdown.j2"),
-            content=html_content)
+            content=html_content,
+        )
 
 
 

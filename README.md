@@ -75,6 +75,18 @@ Leveraging the power of Tailwind CSS, Dashboard Builder offers dynamic and mobil
 1. Complex example of Hospital and Centers for Medicare and Medicaid (CMS) Data for Long Island, New York. It is deployed via Vercel, [please click here](https://dashboard-builder-nyhospitals.appliedhealthinformatics.com). The associated github source code for this repo can found here [https://github.com/hantswilliams/dashboard-builder-cms-longisland](https://github.com/hantswilliams/dashboard-builder-cms-longisland). 
 
 ## To do: 
+- [ ] Add more output visualization components that include:
+    - Folium
+    - GGPlot
+    - Bokeh
+    - Seaborn
+- [ ] Add more input components that might include: 
+    - Date picker
+    - File upload
+    - Checkbox
+    - Multi-select
+    - Color picker
+    - Number input
 - [x] Address matplotlib issue for rendering on web framework
 - [x] Add initial input components
 - [x] Add initial output components
