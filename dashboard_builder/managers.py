@@ -518,6 +518,7 @@ class ComponentManager:
         Args:
             page_title (str, optional): Defaults to "Dashboard Builder"
             footer_text (str, optional): Defaults to "Powered by Dashboard Builder"
+            theme (str, optional): Defaults to "light"
 
         """
         

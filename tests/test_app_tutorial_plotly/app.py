@@ -26,6 +26,7 @@ def index():
     index_manager.template_defaults(
         page_title="Plotly Test Data",
         footer_text="Built by Hants Williams - Plotly Example - Powered by Dashboard Builder", # noqa
+        theme='dark',
     )
 
     input_group = ComponentManager.create_input_group(
