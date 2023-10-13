@@ -6,6 +6,7 @@
 ![Truffle Hog](https://github.com/hantswilliams/dashboard-builder/actions/workflows/trufflehog.yml/badge.svg)
 [![Lisence: apache-2](https://img.shields.io/badge/Lisence:-Apache%202-red)](https://github.com/apache/.github/blob/main/LICENSE)
 
+**[Documentation](https://dashboardbuilder.appliedhealthinformatics.com/)**
 
 The `dashboard-builder` is a Python package designed to help you create interactive web dashboards with minimal effort, while still giving you *full access* to the underlining web framework supporting it - which is [Flask](https://flask.palletsprojects.com/). So whether you're looking to visualize datasets, create dynamic reports, or provide interactive analytics, this library streamlines the process, letting you focus on the data and logic, while it takes care of the presentation.
 
