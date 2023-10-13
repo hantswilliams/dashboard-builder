@@ -106,8 +106,7 @@ Leveraging the power of Tailwind CSS, Dashboard Builder offers dynamic and mobil
 - [x] Create build script 
 - [x] Create at least one basic 'base' template for the dashboard view 
 - [x] Incorporate some form of state management system 
-- [x] Create a simple app example; found [here](/example_dashboards/app1/)
-- [x] Create a more complex app example; found [here](/example_dashboards/app2/)
+- [x] Create a simple app examples
 - [x] Update below markdown/readme, double check it to make sure aligns with API 
 - [x] Create docusuraus documentation site 
 - [ ] Create video tutorials 
