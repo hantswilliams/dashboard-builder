@@ -28,7 +28,7 @@ def index():
     index_manager.template_defaults(
         page_title="CMS 2019 Data",
         footer_text="Built by Hants Williams - Condition Frequency Count Dashboard - Powered by Dashboard Builder", # noqa
-        theme='pink',
+        theme='light',
     )
 
     # Create example intput group 1 

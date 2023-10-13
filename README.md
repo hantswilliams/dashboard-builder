@@ -83,7 +83,7 @@ Leveraging the power of Tailwind CSS, Dashboard Builder offers dynamic and mobil
 
 ## **Example Dashboards**
 
-1. Complex example of Hospital and Centers for Medicare and Medicaid (CMS) Data for Long Island, New York. It is deployed via Vercel, [please click here](https://dashboard-builder-nyhospitals.appliedhealthinformatics.com). The associated github source code for this repo can found here [https://github.com/hantswilliams/dashboard-builder-cms-longisland](https://github.com/hantswilliams/dashboard-builder-cms-longisland). 
+1. Complex example of Hospital and Centers for Medicare and Medicaid (CMS) Data for Long Island, New York. It is deployed via Vercel, [please click here](https://dashboard-builder-cms-longisland-ua432tkhwq-uc.a.run.app/). The associated github source code for this repo can found here [https://github.com/hantswilliams/dashboard-builder-cms-longisland](https://github.com/hantswilliams/dashboard-builder-cms-longisland). 
 
 ## To do: 
 - [ ] Add more output visualization components that include:
@@ -108,8 +108,8 @@ Leveraging the power of Tailwind CSS, Dashboard Builder offers dynamic and mobil
 - [x] Incorporate some form of state management system 
 - [x] Create a simple app example; found [here](/example_dashboards/app1/)
 - [x] Create a more complex app example; found [here](/example_dashboards/app2/)
-- [ ] Update below markdown/readme, double check it to make sure aligns with API 
-- [ ] Create docusuraus documentation site 
+- [x] Update below markdown/readme, double check it to make sure aligns with API 
+- [x] Create docusuraus documentation site 
 - [ ] Create video tutorials 
 ---
 
